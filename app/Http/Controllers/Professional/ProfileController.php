@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Professional;
 
 use App\Http\Controllers\Controller;
+use App\Models\Professional;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -44,7 +47,7 @@ class ProfileController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('Professional.profile.edit');
     }
 
     /**
@@ -52,7 +55,38 @@ class ProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $sanitized = $request->validate([
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'username' => ['required'],
+            'address' => ['required'],
+            'phonenumber' => ['required'],
+            'profile_image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'email' => ['required', 'unique:users,email,' . Auth::user()->id],
+        ]);
+
+        // dd($request->all());
+
+        User::find(Auth::user()->professional->user_id)->update([
+            'username' => $sanitized['username'],
+            'email' => $sanitized['email'],
+        ]);
+
+        // $professional->update([
+            Professional::find(Auth::user()->professional->id)->update([
+            // 'user_id' => $sanitized['user_id'],
+            'first_name' => $sanitized['first_name'],
+            'last_name' => $sanitized['last_name'],
+            'address' => $sanitized['address'],
+            'phonenumber' => $sanitized['phonenumber'],
+        ]);
+
+        if ($request->hasFile('profile_image')) {
+            $imagePath = $request->file('profile_image')->store('profile-images', 'public');
+            Professional::find(Auth::user()->professional->id)->update(['profile_image' => $imagePath]);
+        }
+
+        return redirect()->back()->with('success', 'Information updated successfully!');
     }
 
     /**

@@ -12,7 +12,7 @@ Profile Settings
     </div>
 
     <div class="mt-5">
-      <a href="" class="bg-rose-500 text-white py-2 px-4 rounded-lg">
+      <a href="{{route('professional.my-profile.edit', auth()->user()->id)}}" class="bg-rose-500 text-white py-2 px-4 rounded-lg">
         Edit Details
       </a>
     </div>
