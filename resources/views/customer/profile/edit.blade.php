@@ -7,7 +7,7 @@ Profile Settings
 
 <section class="flex space-x-10 p-10 mt-10 mb-10">
   <div id="left" class="bg-slate-100 p-10 rounded-md w-1/3">
-    <form action="" method="POST" class="space-y-6">
+    <form action="{{route('customer.my-profile.update', auth()->user()->customer->user_id)}}" method="POST" class="space-y-6" enctype="multipart/form-data">
         @csrf 
         @method('PATCH')
         <div class="w-20 h-20">
@@ -20,6 +20,11 @@ Profile Settings
         </div>
 
         <div>
+          <label for="last_name" class="text-gray-500 font-semibold">Last Name</label>
+          <input class="mt-1 block w-full border border-gray-400 rounded-md" type="text" name="last_name" value="{{auth()->user()->customer->last_name}}">
+        </div>
+
+        <div>
           <label for="username" class="text-gray-500 font-semibold">Username</label>
           <input class="mt-1 block w-full border border-gray-400 rounded-md" type="text" name="username" value="{{auth()->user()->username}}">
         </div>
@@ -27,12 +32,7 @@ Profile Settings
         <div>
           <label for="phonenumber" class="text-gray-500 font-semibold">Phonenumber</label>
           <input class="mt-1 block w-full border border-gray-400 rounded-md" type="text" name="phonenumber" value="{{auth()->user()->customer->phonenumber}}">    
-        </div>  
-
-        <div>
-          <label for="last_name" class="text-gray-500 font-semibold">Last Name</label>
-          <input class="mt-1 block w-full border border-gray-400 rounded-md" type="text" name="last_name" value="{{auth()->user()->customer->last_name}}">
-        </div>
+        </div>         
 
         <div>
           <label for="address" class="text-gray-500 font-semibold">Address</label>
@@ -43,6 +43,13 @@ Profile Settings
           <label for="email" class="text-gray-500 font-semibold">Email</label>
           <input class="mt-1 block w-full border border-gray-400 rounded-md" type="text" name="email" value="{{auth()->user()->email}}">
         </div>
+
+        <div class="mb-5">
+            <label for="profile_image" class="text-gray-500 font-semibold">Upload New Profile Image</label>
+            <input type="file" id="profile_image" name="profile_image" class="block w-full text-sm mt-1 text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar">
+            <x-input-error :messages="$errors->get('profile_image')" class="mt-2" />
+        </div>
+        
         <button type="submit" class="bg-blue-700 py-2 px-4 text-white rounded-md">Save</button>
         </form>
   </div>
