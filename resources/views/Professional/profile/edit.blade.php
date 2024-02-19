@@ -5,7 +5,7 @@ Profile Settings
 
 @section('content')
 
-<section class="flex space-x-10 p-10 mt-10 mb-10">
+<section class="flex space-x-10 p-10 mt-10 mb-10 justify-center">
   <div id="left" class="bg-slate-100 p-10 rounded-md w-1/3">
     <form action="{{route('professional.my-profile.update', auth()->user()->professional->user_id)}}" method="POST" class="space-y-6" enctype="multipart/form-data">
         @csrf 
@@ -49,9 +49,12 @@ Profile Settings
             <input type="file" id="profile_image" name="profile_image" class="block w-full text-sm mt-1 text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar">
             <x-input-error :messages="$errors->get('profile_image')" class="mt-2" />
         </div>
-        
-        <button type="submit" class="bg-blue-700 py-2 px-4 text-white rounded-md">Save</button>
-        </form>
+
+        <div>
+          <button type="submit" class="bg-blue-700 py-2 px-4 text-white rounded-md">Save</button>
+        </div>
+
+      </form>
   </div>
 
   <div id="right" class="bg-slate-100 p-10 rounded-md w-1/3">

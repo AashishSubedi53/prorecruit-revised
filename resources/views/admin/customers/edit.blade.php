@@ -58,7 +58,7 @@
             @else
                 <p>No profile image available</p>
             @endif
-        </div>
+      </div>
 
         <!-- Upload New Profile Image -->
         <div class="mb-5">

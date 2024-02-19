@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SiteSettingController extends Controller
 {
@@ -13,7 +14,8 @@ class SiteSettingController extends Controller
      */
     public function index()
     {
-        return view('admin.settings.index');
+        // $siteSettings = SiteSetting::firstOrFail();
+        // return view('admin.settings.index', compact('siteSettings'));
     }
 
     /**
@@ -43,9 +45,10 @@ class SiteSettingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SiteSetting $siteSetting)
+    public function edit()
     {
-        //
+        $siteSettings = SiteSetting::firstOrFail(); // Assuming you have a single record for site settings
+        return view('admin.settings.edit', compact('siteSettings'));
     }
 
     /**
@@ -53,9 +56,54 @@ class SiteSettingController extends Controller
      */
     public function update(Request $request, SiteSetting $siteSetting)
     {
-        //
-    }
+        $sanitized = $request->validate([
+            'phonenumber' => 'required',
+            'address' => 'required',
+            'email' => 'required|email',
+            'instagram' => 'url',
+            'tiktok' => 'url',
+            'facebook' => 'url',
+            'copyright' => 'required',
+            'about_us_description' => 'required',
+            'about_us_image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'logo' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'homepage_banner' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048']
+            // Add validation rules for other fields
+        ]);
 
+        // dd($request->all());
+
+        $siteSettings = SiteSetting::firstOrFail(); // Assuming you have a single record for site settings
+
+        $siteSettings->update([
+            'phonenumber' => $sanitized['phonenumber'],
+            'address' => $sanitized['address'],
+            'email' => $sanitized['email'],
+            'instagram' => $sanitized['instagram'],
+            'tiktok' => $sanitized['tiktok'],
+            'facebook' => $sanitized['facebook'],
+            'copyright' => $sanitized['copyright'],
+            'about_us_description' => $sanitized['about_us_description'],
+            // Update other fields accordingly
+        ]);
+
+        if ($request->hasFile('about_us_image')) {
+            $imagePath = $request->file('about_us_image')->store('site-settings', 'public');
+            $siteSettings->update(['about_us_image' => $imagePath]);
+        }
+
+        if ($request->hasFile('logo')) {
+            $imagePath = $request->file('logo')->store('site-settings', 'public');
+            $siteSettings->update(['logo' => $imagePath]);
+        }
+
+        if ($request->hasFile('homepage_banner')) {
+            $imagePath = $request->file('homepage_banner')->store('site-settings', 'public');
+            $siteSettings->update(['homepage_banner' => $imagePath]);
+        }
+
+        return redirect()->back()->with('success', 'Site settings updated successfully.');
+    }
     /**
      * Remove the specified resource from storage.
      */

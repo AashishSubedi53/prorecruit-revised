@@ -97,10 +97,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::resource('professionals', ProfessionalController::class);
     Route::resource('services', ServiceController::class);
     Route::resource('serviceCategories', ServiceCategoryController::class);
-    Route::resource('settings', SiteSettingController::class);
+    // Route::resource('settings', SiteSettingController::class);
     Route::resource('reports', GenerateReportController::class);
     Route::resource('bookings', OrderController::class);
 });
+
+// site Settings
+Route::get('admin/site-settings', [SiteSettingController::class, 'edit'])->middleware(['auth', 'verified'])->name('admin.settings.edit');
+Route::patch('admin/site-settings', [SiteSettingController::class, 'update'])->middleware(['auth', 'verified'])->name('admin.settings.update');
 
 require __DIR__.'/auth.php';
 
