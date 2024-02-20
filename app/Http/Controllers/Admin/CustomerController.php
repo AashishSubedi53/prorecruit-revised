@@ -114,7 +114,7 @@ class CustomerController extends Controller
         ]);
 
         $customer->update([
-            'user_id' => $sanitized['user_id'],
+            // 'user_id' => $sanitized['user_id'],
             'first_name' => $sanitized['first_name'],
             'last_name' => $sanitized['last_name'],
             'address' => $sanitized['address'],

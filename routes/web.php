@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SiteSettingController;
+use App\Http\Controllers\Customer\HomeController as CustomerHomeController;
 use App\Http\Controllers\Customer\ProfessionalSearchController;
 use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
 use App\Http\Controllers\GoogleAuthController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\Professional\GalleryController;
 use App\Http\Controllers\Professional\OrderController as ProfessionalOrderController;
 use App\Http\Controllers\Professional\ProfileController as ProfessionalProfileController;
 use App\Http\Controllers\Professional\ServiceController as ProfessionalServiceController;
+use App\Models\Service;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,7 +35,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $homeServices = Service::where('service_category_id', '1')->get() ?? [];
+    $healthServices = Service::where('service_category_id', '2')->get() ?? [];
+    $webServices = Service::where('service_category_id', '3')->get() ?? [];
+    return view('welcome', compact(['homeServices', 'healthServices', 'webServices']));
 })->name('home');
 
 
@@ -111,7 +116,7 @@ require __DIR__.'/auth.php';
 
 Route::group(['prefix' => 'customer', 'as' => 'customer.'], function(){
     Route::resource('my-profile', CustomerProfileController::class);
-    Route::resource('search-professional', ProfessionalSearchController::class);
+    Route::resource('search-professional', CustomerHomeController::class);
 
 });
 

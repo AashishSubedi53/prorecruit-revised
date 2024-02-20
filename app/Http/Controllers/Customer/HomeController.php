@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
-class ProfessionalSearchController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
