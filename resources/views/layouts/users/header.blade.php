@@ -68,9 +68,9 @@
   @endauth
   </div>  
 
-
-  <div class="bg-blue-700 text-center text-white text-[26px] font-semibold">
+  <div class="bg-blue-700 text-center text-white mb-10 text-[26px] font-semibold">
     <h3 class="mt-10">
       @yield('title')
     </h3>
   </div>
+

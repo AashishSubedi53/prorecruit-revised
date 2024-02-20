@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SiteSettingController;
+use App\Http\Controllers\Customer\ProfessionalSearchController;
 use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\Professional\BookingController;
@@ -110,6 +111,7 @@ require __DIR__.'/auth.php';
 
 Route::group(['prefix' => 'customer', 'as' => 'customer.'], function(){
     Route::resource('my-profile', CustomerProfileController::class);
+    Route::resource('search-professional', ProfessionalSearchController::class);
 
 });
 
