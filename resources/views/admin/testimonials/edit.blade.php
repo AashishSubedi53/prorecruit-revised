@@ -14,9 +14,16 @@
         </div>
 
         <div class="max-w-full mb-5">
-                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Testimonial Description</label>
-                <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Testimonial Description...">{{$testimonial->description}}</textarea>
-                <x-input-error :messages="$errors->get('description')" class="mt-2" />
+            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Testimonial Description</label>
+            <div x-data="{ description: '', wordCount:  0 }" class="relative">
+                <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  
+                          placeholder="Testimonial Description..."  
+                          x-model="description"
+                          @input="wordCount = description.split(' ').filter(Boolean).length"
+                          x-ref="description">{{$testimonial->description}}</textarea>
+                <div class="absolute bottom-0 right-0 p-2 text-xs text-gray-600" x-text="wordCount + ' / 50 words'" x-cloak></div>
+            </div>
+            <x-input-error :messages="$errors->get('description')" class="mt-2" />
         </div>
       
 

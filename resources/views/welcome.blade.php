@@ -175,157 +175,6 @@ Welcome,&nbsp;<span>{{auth()->user()->username}}</span>
     </div>
 </div>
 
-<!-- <div class="testimonials mt-10">
-    <h1 class="text-3xl font-semibold text-center">Testimonials</h1>
-
-    <div x-data="{ transform: 0, totalItems: {{count($testimonials)}}}">
-        <div class="flex items-center justify-center py-24 sm:py-8 px-4">
-            <div class="relative flex items-center justify-center w-1/2 h-60 mx-auto">
-                    <button aria-label="slide backward" class="absolute z-30 left-0 ml-[-30px] mt-[-30px] focus:outline-none cursor-pointer bg-gray-200 p-3 rounded-full"
-                    @click="transform += 398; transform = (transform > 0) ? -398 * (totalItems - 1) : transform">
-
-                    <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
-                    <div id="slider3"
-                        class="flex flex-row lg:gap-8 md:gap-6 gap-14 justify-start transition ease-out duration-700"
-                        x-bind:style="'transform: translateX(' + transform + 'px)'">
-                        
-                        @foreach($testimonials as $testimonial)
-                            <div class="p-5 w-1/2 rounded-lg border border-gray-100 shadow-lg space-y-2">
-                                <div class="text-justify text-[12px] text-gray-500">
-                                    <p>{{$testimonial->description}}</p>
-                                </div>
-
-                                <div class="flex items-center space-x-1"> 
-                                    <div class="bg-slate-500 rounded-full h-16 w-16">
-                                        <img src="{{ asset('storage/' . $testimonial->user_image) }}" alt="user image" class="h-full w-full object-cover rounded-full">
-                                    </div> 
-                                    <p class="text-center item">{{$testimonial->username}}</p> 
-                                </div>
-                            </div>
-
-                        @endforeach
-                    </div>
-                </div>
-                <button aria-label="slide forward" class="absolute z-30 right-0 mr-[-30px] mt-[-30px] focus:outline-none cursor-pointer bg-gray-200 p-3 rounded-full"
-                    @click="transform -= 398; transform = (transform < -398 * (totalItems - 1)) ? 0 : transform">
-                    <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-<!-- <div class="testimonials mt-10">
-    <h1 class="text-3xl font-semibold text-center">Testimonials</h1>
-
-    <div x-data="{ transform: 0, totalItems: {{count($testimonials)}}}">
-        <div class="flex items-center justify-center py-24 sm:py-8 px-4">
-            <div class="relative flex items-center justify-center w-1/2 h-60 mx-auto">
-                <button aria-label="slide backward" class="absolute z-30 left-0 ml-[-30px] mt-[-30px] focus:outline-none cursor-pointer bg-gray-200 p-3 rounded-full"
-                    @click="transform += 398; transform = (transform > 0) ? -398 * (totalItems - 1) : transform">
-
-                    <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
-                    <div id="slider3"
-                        class="flex flex-row lg:gap-8 md:gap-6 gap-14 justify-start transition ease-out duration-700"
-                        x-bind:style="'transform: translateX(' + transform + 'px)'">
-                        
-                        @foreach($testimonials as $testimonial)
-                            <div class="p-5 w-1/2 rounded-lg border border-gray-100 shadow-lg space-y-2">
-                                <div class="text-justify text-[12px] text-gray-500">
-                                    <p>{{$testimonial->description}}</p>
-                                </div>
-
-                                <div class="flex items-center space-x-1"> 
-                                    <div class="bg-slate-500 rounded-full h-16 w-16">
-                                        <img src="{{ asset('storage/' . $testimonial->user_image) }}" alt="user image" class="h-full w-full object-cover rounded-full">
-                                    </div> 
-                                    <p class="text-center item">{{$testimonial->username}}</p> 
-                                </div>
-                            </div>
-
-                        @endforeach
-                    </div>
-                </div>
-                <button aria-label="slide forward" class="absolute z-30 right-0 mr-[-30px] mt-[-30px] focus:outline-none cursor-pointer bg-gray-200 p-3 rounded-full"
-                    @click="transform -= 398; transform = (transform < -398 * (totalItems - 1)) ? 0 : transform">
-                    <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-<!-- <div class="testimonials mt-10">
-    <h1 class="text-3xl font-semibold text-center">Testimonials</h1>
-
-    <div x-data="{ transform: 0, totalItems: {{count($testimonials)}}}">
-        <div class="flex items-center justify-center py-24 sm:py-8 px-4">
-            <div class="relative flex items-center justify-center w-1/2 h-60 mx-auto">
-                <button aria-label="slide backward" class="absolute z-30 left-0 ml-[-30px] mt-[-30px] focus:outline-none cursor-pointer bg-gray-200 p-3 rounded-full"
-                    @click="transform += 398; transform = (transform > 0) ? -398 * (totalItems - 1) : transform">
-
-                    <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
-                    @foreach($testimonials as $testimonial)
-                    <div id="slider3"
-                        class="flex flex-row lg:gap-8 md:gap-6 gap-14 justify-start transition ease-out duration-700"
-                        x-bind:style="'transform: translateX(' + transform + 'px)'">
-                        
-                        
-                            <div class="p-5 w-full rounded-lg border border-gray-100 shadow-lg space-y-2">
-                                <div class="text-justify text-[12px] text-gray-500">
-                                    <p>{{$testimonial->description}}</p>
-                                </div>
-
-                                <div class="flex items-center space-x-1"> 
-                                    <div class="bg-slate-500 rounded-full h-16 w-16">
-                                        <img src="{{ asset('storage/' . $testimonial->user_image) }}" alt="user image" class="h-full w-full object-cover rounded-full">
-                                    </div> 
-                                    <p class="text-center item">{{$testimonial->username}}</p> 
-                                </div>
-                            </div>
-
-                    </div>
-                    @endforeach
-                </div>
-                <button aria-label="slide forward" class="absolute z-30 right-0 mr-[-30px] mt-[-30px] focus:outline-none cursor-pointer bg-gray-200 p-3 rounded-full"
-                    @click="transform -= 398; transform = (transform < -398 * (totalItems - 1)) ? 0 : transform">
-                    <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <div class="testimonials">
     <h1 class="text-3xl font-semibold text-center mb-5">Testimonials</h1>
 
@@ -357,7 +206,6 @@ Welcome,&nbsp;<span>{{auth()->user()->username}}</span>
         </div>
         <!-- Slider controls -->
         <button type="button" class="absolute top-0 start-[-50px] z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-            <!-- Your Previous button content -->
             <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
                 <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
@@ -366,7 +214,6 @@ Welcome,&nbsp;<span>{{auth()->user()->username}}</span>
             </span>
         </button>
         <button type="button" class="absolute top-0 end-[-50px] z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-            <!-- Your Next button content -->
             <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
                 <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
