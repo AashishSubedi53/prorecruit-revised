@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('site_settings', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
             $table->string('phonenumber')->nullable();
             $table->string('address')->nullable();
-            $table->string('email')->nullable();
+            $table->string('email')->nullable()->default('prorecruit@gmail.com');
             $table->string('instagram')->nullable();
             $table->string('tiktok')->nullable();
             $table->string('facebook')->nullable();

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SiteSettingController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Customer\HomeController as CustomerHomeController;
 use App\Http\Controllers\Customer\ProfessionalSearchController;
 use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\Professional\OrderController as ProfessionalOrderContro
 use App\Http\Controllers\Professional\ProfileController as ProfessionalProfileController;
 use App\Http\Controllers\Professional\ServiceController as ProfessionalServiceController;
 use App\Models\Service;
+use App\Models\Testimonial;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,7 +40,10 @@ Route::get('/', function () {
     $homeServices = Service::where('service_category_id', '1')->get() ?? [];
     $healthServices = Service::where('service_category_id', '2')->get() ?? [];
     $webServices = Service::where('service_category_id', '3')->get() ?? [];
-    return view('welcome', compact(['homeServices', 'healthServices', 'webServices']));
+
+    // testimonials
+    $testimonials = Testimonial::all();
+    return view('welcome', compact(['homeServices', 'healthServices', 'webServices', 'testimonials']));
 })->name('home');
 
 
@@ -104,6 +109,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::resource('services', ServiceController::class);
     Route::resource('serviceCategories', ServiceCategoryController::class);
     // Route::resource('settings', SiteSettingController::class);
+    Route::resource('testimonials', TestimonialController::class);
     Route::resource('reports', GenerateReportController::class);
     Route::resource('bookings', OrderController::class);
 });

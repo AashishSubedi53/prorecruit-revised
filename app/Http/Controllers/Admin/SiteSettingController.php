@@ -47,7 +47,13 @@ class SiteSettingController extends Controller
      */
     public function edit()
     {
-        $siteSettings = SiteSetting::firstOrFail(); // Assuming you have a single record for site settings
+        $siteSettings = SiteSetting::first();
+    
+        if (!$siteSettings) {
+            $siteSettings = new SiteSetting();
+            $siteSettings->save();
+        }
+
         return view('admin.settings.edit', compact('siteSettings'));
     }
 
@@ -68,12 +74,11 @@ class SiteSettingController extends Controller
             'about_us_image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'logo' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'homepage_banner' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048']
-            // Add validation rules for other fields
         ]);
 
         // dd($request->all());
 
-        $siteSettings = SiteSetting::firstOrFail(); // Assuming you have a single record for site settings
+        $siteSettings = SiteSetting::firstOrFail(); 
 
         $siteSettings->update([
             'phonenumber' => $sanitized['phonenumber'],
@@ -84,7 +89,6 @@ class SiteSettingController extends Controller
             'facebook' => $sanitized['facebook'],
             'copyright' => $sanitized['copyright'],
             'about_us_description' => $sanitized['about_us_description'],
-            // Update other fields accordingly
         ]);
 
         if ($request->hasFile('about_us_image')) {
