@@ -16,34 +16,5 @@ document.addEventListener("alpine:init", ()=> {
     }))
   });
 
-
-// for the customer homepage and landing page slider
-
-// window.onload = function() {
-//    var slider = document.getElementById('slider');
-//    var firstSlide = slider.firstElementChild.cloneNode(true);
-//    var lastSlide = slider.lastElementChild.cloneNode(true);
-//    slider.appendChild(firstSlide);
-//    slider.insertBefore(lastSlide, slider.firstElementChild);
-// }
-
-// window.onload = function() {
-//   var slider = document.getElementById('slider1');
-//   var firstSlide = slider.firstElementChild.cloneNode(true);
-//   var lastSlide = slider.lastElementChild.cloneNode(true);
-//   slider.appendChild(firstSlide);
-//   slider.insertBefore(lastSlide, slider.firstElementChild);
-// }
-// window.onload = function() {
-//   var slider = document.getElementById('slider2');
-//   var firstSlide = slider.firstElementChild.cloneNode(true);
-//   var lastSlide = slider.lastElementChild.cloneNode(true);
-//   slider.appendChild(firstSlide);
-//   slider.insertBefore(lastSlide, slider.firstElementChild);
-// }
-
-
-
-
 Alpine.start();
 
