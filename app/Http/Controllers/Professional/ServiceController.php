@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Professional;
 
 use App\Http\Controllers\Controller;
 use App\Models\Professional\Service;
+use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -21,7 +22,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        $serviceCategories = ServiceCategory::all();
+        return view('Professional.services.create', compact('serviceCategories'));
     }
 
     /**

@@ -25,7 +25,7 @@
     
    <!-- table --> 
 <div class="mt-5 mb-5 p-5">
-  <a href="{{route('admin.customers.create')}}" class="text-white bg-blue-500 p-3 rounded ">Add Services</a>
+  <a href="{{route('professional.my-services.create')}}" class="text-white bg-blue-500 p-3 rounded ">Add Services</a>
 </div>
 <div class="relative overflow-x-auto p-5 mb-10">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

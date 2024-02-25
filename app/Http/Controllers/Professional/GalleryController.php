@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Professional;
 use App\Http\Controllers\Controller;
 use App\Models\Professional\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GalleryController extends Controller
 {
@@ -13,7 +14,8 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        return view('Professional.Gallery.index');
+        $galleries = Gallery::all();
+        return view('Professional.Gallery.index', compact('galleries'));
     }
 
     /**
@@ -29,7 +31,20 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $images = $request->file('images');
+        foreach ($images as $key => $img) {
+            $multiimageName = time() . '_' . $key . '.' . $img->getClientOriginalExtension();
+            $uploadPath = $img->storeAs('gallery-images', $multiimageName, 'public');
+
+
+            Gallery::create([
+                'professional_id' => Auth::user()->professional->id,
+                'url' => $uploadPath,
+                'alt' => 'test'
+            ]);
+        }
+    
+        return redirect()->route('professional.gallery.index')->with('success', 'Images uploaded successfully!');
     }
 
     /**
@@ -61,6 +76,7 @@ class GalleryController extends Controller
      */
     public function destroy(Gallery $gallery)
     {
-        //
+        $gallery->delete();
+        return redirect()->back()->with('success', 'Image deleted successfully!');
     }
 }
