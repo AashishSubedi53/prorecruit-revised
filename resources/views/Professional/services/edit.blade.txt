@@ -1,0 +1,12 @@
+@extends('layouts.users.app')
+
+@section('title')
+    Edit Services
+@endsection
+
+@section('content')
+<div class="p-10 flex flex-col w-1/2 space-y-8">
+    {{-- <livewire:professional.edit-services/> --}}
+    {{-- @livewire('professional.edit-services') --}}
+</div>
+@endsection

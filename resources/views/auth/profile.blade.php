@@ -32,11 +32,11 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
                                      
                     <div>
-                        <x-input-label for="name" :value="__('Name')"/>
+                        <x-input-label for="username" :value="__('Username')"/>
                         <x-text-input type="text"
-                                 name="name"
-                                 id="name"
-                                 value="{{ old('name', auth()->user()->name) }}"
+                                 name="username"
+                                 id="username"
+                                 value="{{ old('username', auth()->user()->username) }}"
                                  required
                         />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />

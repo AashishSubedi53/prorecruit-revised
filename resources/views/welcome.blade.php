@@ -14,7 +14,7 @@ Welcome,&nbsp;<span>{{auth()->user()->username}}</span>
               </svg>
           </div>
           <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search professionals based on services..." required />
-          <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+          <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700">Search</button>
       </div>
   </form>
   @endif
@@ -27,27 +27,27 @@ Welcome,&nbsp;<span>{{auth()->user()->username}}</span>
 <div class="bg-slate-200">
   <div class="flex justify-center space-x-12 p-10 text-center">
     <div>
-      <a href=""><img src="{{asset('build/assets/icons/home.png')}}" alt="home" height="50px" width="50px"></a>
+      <a href=""><img src="{{asset('storage/icons/home.png')}}" alt="home" height="50px" width="50px"></a>
       <p>Home</p>
     </div>
     <div>
-      <a href=""><img src="{{asset('build/assets/icons/Health.png')}}" alt="health" height="50px" width="50px"></a>
+      <a href=""><img src="{{asset('storage/icons/Health.png')}}" alt="health" height="50px" width="50px"></a>
       <p>Health</p>
     </div>
     <div>
-      <a href=""><img src="{{asset('build/assets/icons/events.png')}}" alt="events" height="50px" width="50px"></a>
+      <a href=""><img src="{{asset('storage/icons/events.png')}}" alt="events" height="50px" width="50px"></a>
       <p>Events</p>
     </div>
     <div>
-      <a href=""><img src="{{asset('build/assets/icons/business.png')}}" alt="business" height="50px" width="50px"></a>
+      <a href=""><img src="{{asset('storage/icons/business.png')}}" alt="business" height="50px" width="50px"></a>
       <p>Business</p>
     </div>
     <div>
-      <a href=""><img src="{{asset('build/assets/icons/design&web.png')}}" alt="design&web" height="50px" width="50px"></a>
+      <a href=""><img src="{{asset('storage/icons/design&web.png')}}" alt="design&web" height="50px" width="50px"></a>
       Design&Web
     </div>
     <div>
-      <a href=""><img src="{{asset('build/assets/icons/more.png')}}" alt="more" height="50px" width="50px"></a>
+      <a href=""><img src="{{asset('storage/icons/more.png')}}" alt="more" height="50px" width="50px"></a>
       More
     </div>
   </div>

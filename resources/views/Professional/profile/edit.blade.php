@@ -6,7 +6,7 @@ Profile Settings
 @section('content')
 
 <section class="flex space-x-10 p-10 mt-10 mb-10 justify-center">
-  <div id="left" class="bg-slate-100 p-10 rounded-md w-1/3">
+  <div id="left" class="bg-gray-100 p-10 rounded-md w-1/3">
     <form action="{{route('professional.my-profile.update', auth()->user()->professional->user_id)}}" method="POST" class="space-y-6" enctype="multipart/form-data">
         @csrf 
         @method('PATCH')
@@ -57,7 +57,7 @@ Profile Settings
       </form>
   </div>
 
-  <div id="right" class="bg-slate-100 p-10 rounded-md w-1/3">
+  <div id="right" class="bg-gray-100 p-10 rounded-md w-1/3">
     <h3 class="text-2xl font-semibold">Change Password</h3>
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
           @csrf
@@ -82,7 +82,7 @@ Profile Settings
           </div>
 
           <div class="flex items-center gap-4">
-              <button class="bg-blue-600 text-white py-2 px-4 rounded-md">Save</button>
+              <button class="bg-blue-700 text-white py-2 px-4 rounded-md">Save</button>
 
               @if (session('status') === 'password-updated')
                   <p

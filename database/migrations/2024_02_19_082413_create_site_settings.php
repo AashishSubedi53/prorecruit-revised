@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id');
             $table->string('phonenumber')->nullable();
             $table->string('address')->nullable();
-            $table->string('email')->nullable()->default('prorecruit@gmail.com');
+            $table->string('email')->nullable();
             $table->string('instagram')->nullable();
             $table->string('tiktok')->nullable();
             $table->string('facebook')->nullable();

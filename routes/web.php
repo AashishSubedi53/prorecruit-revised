@@ -13,14 +13,19 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Customer\HomeController as CustomerHomeController;
+use App\Http\Controllers\Customer\ProfessionalDetailsController;
 use App\Http\Controllers\Customer\ProfessionalSearchController;
 use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\Professional\BookingController;
 use App\Http\Controllers\Professional\GalleryController;
 use App\Http\Controllers\Professional\OrderController as ProfessionalOrderController;
+use App\Http\Controllers\Professional\ProfessionalServiceController;
 use App\Http\Controllers\Professional\ProfileController as ProfessionalProfileController;
-use App\Http\Controllers\Professional\ServiceController as ProfessionalServiceController;
+use App\Livewire\Professional\Services;
+use App\Livewire\Professional\Services\CreateServices;
+use App\Livewire\Professional\Services\EditServices;
+use App\Livewire\Professional\Services\Index;
 use App\Models\Service;
 use App\Models\Testimonial;
 use Illuminate\Support\Facades\Route;
@@ -123,6 +128,8 @@ require __DIR__.'/auth.php';
 Route::group(['prefix' => 'customer', 'as' => 'customer.'], function(){
     Route::resource('my-profile', CustomerProfileController::class);
     Route::resource('search-professional', CustomerHomeController::class);
+    Route::resource('professional-details', ProfessionalDetailsController::class);
+    
 
 });
 
@@ -131,11 +138,14 @@ Route::group(['prefix' => 'professional', 'as' => 'professional.'], function(){
     Route::resource('/', HomeController::class);
     Route::resource('my-profile', ProfessionalProfileController::class);
     Route::resource('my-orders', ProfessionalOrderController::class);
-    Route::resource('my-services', ProfessionalServiceController::class);
+    // Route::resource('my-services', ProfessionalServiceController::class);
     Route::resource('my-bookings', BookingController::class);
-    Route::resource('gallery', GalleryController::class);
-
+    Route::resource('gallery', GalleryController::class); 
     
+    //routes for my-services
+    Route::get('/my-services', Index::class)->name('my-services.index');
+    Route::get('my-services/create', CreateServices::class)->name('my-services.create');
+    Route::get('my-services/edit/{proService}', EditServices::class)->name('my-services.edit');
 });
 
 

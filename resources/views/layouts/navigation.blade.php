@@ -104,7 +104,6 @@
             </x-slot>
             Generate Report
         </x-nav-link>
-
         
     </nav>
 </div>

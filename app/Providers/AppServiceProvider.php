@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\SiteSetting;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // footer controller
+        View::composer('layouts.users.footer', function($view){
+            $siteSettings = SiteSetting::first();
+            $view->with('siteSettings', $siteSettings);
+        });
+
+        // about us page controller
+        View::composer('about', function($view){
+            $siteSettings = SiteSetting::first();
+            $view->with('siteSettings', $siteSettings);
+        });
     }
 }

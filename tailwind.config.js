@@ -14,7 +14,15 @@ export default {
     ],
 
     theme: {
+        // colors: {
+        //     primary: '#3f37c9'
+        // },
         extend: {
+            container: {
+                screens: {
+                    '2xl': '1280px'
+                }
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },

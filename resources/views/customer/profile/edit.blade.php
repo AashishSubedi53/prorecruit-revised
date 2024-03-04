@@ -5,7 +5,7 @@ Profile Settings
 
 @section('content')
 
-<section class="flex space-x-10 p-10 mt-10 mb-10 justify-center h-screen">
+<section class="flex space-x-10 p-10 mt-10 mb-10 justify-center">
   <div id="left" class="bg-slate-100 p-10 rounded-md w-1/3">
     <form action="{{route('customer.my-profile.update', auth()->user()->customer->user_id)}}" method="POST" class="space-y-6" enctype="multipart/form-data">
         @csrf 
@@ -53,7 +53,7 @@ Profile Settings
         <div class="">
           <button type="submit" class="bg-blue-700 py-2 px-4 text-white rounded-md">Save</button>
         </div>
-        </form>
+      </form>
   </div>
 
   <div id="right" class="bg-slate-100 p-10 rounded-md w-1/3">

@@ -2,7 +2,6 @@
   <x-slot name="header">
        Add Customers
   </x-slot>
-
     <form class="max-w-lg mb-5 mt-10" action="{{route('admin.customers.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="user_type" value="customer">

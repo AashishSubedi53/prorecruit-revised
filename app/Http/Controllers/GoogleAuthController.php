@@ -38,16 +38,20 @@ class GoogleAuthController extends Controller
                     
                 ]);
 
-                // if(session('user_type') === 'customer'){
-                //     Customer::create([
-                //         'profile_image'
-                //     ]);
-                // }else{
-                //     Professional::create([
-                //         'profile_image'
-                //     ]);
-                // }
+                if(session('user_type') === 'customer'){
+                    Customer::create([
+                        'profile_image'
+                    ]);
+                }else{
+                    Professional::create([
+                        'profile_image'
+                    ]);
+                    
+                }
                 Auth::login($new_user);
+                // if(session('user_type')==='customer'){
+                //     return redirect()->route('home');
+                // }
                 return redirect(RouteServiceProvider::redirectTo());
                 
             } else{

@@ -1,7 +1,9 @@
 @extends('layouts.users.app')
 
 @section('title')
+  @auth
   Welcome, {{auth()->user()->username}}
+  @endauth
 @endsection
 
 @section('content')
@@ -63,7 +65,7 @@
   <div class="shadow-lg border border-gray-300 bg-slate-200 rounded-lg hover:shadow-xl active:bg-gray-300 py-5">
     <a href="{{route('professional.my-bookings.index')}}" class="flex flex-col items-center">
       <div class="w-20 h-24">
-        <img src="{{asset('build/assets/icons/booking.png')}}" alt="">
+        <img src="{{asset('storage/icons/booking.png')}}" alt="">
       </div>
       <p class="font-semibold text-[16px]">My Bookings</p>
     </a>
@@ -72,7 +74,7 @@
   <div class="shadow-lg border border-gray-300 bg-slate-200 rounded-lg hover:shadow-xl active:bg-gray-300 py-3">
     <a href="{{route('professional.my-orders.index')}}" class="flex flex-col items-center">
       <div class="w-20 h-24 mt-3">
-        <img src="{{asset('build/assets/icons/orders.png')}}" alt="">
+        <img src="{{asset('storage/icons/orders.png')}}" alt="">
       </div>
       <p class="font-semibold text-[16px]">My Orders</p>
     </a>
@@ -81,7 +83,7 @@
   <div class="shadow-lg border border-gray-300 bg-slate-200 rounded-lg hover:shadow-xl active:bg-gray-300 py-5">
     <a href="{{route('professional.my-services.index')}}" class="flex flex-col items-center">
       <div class="w-20 h-24">
-        <img src="{{asset('build/assets/icons/services.png')}}" alt="">
+        <img src="{{asset('storage/icons/services.png')}}" alt="">
       </div>
       <p class="font-semibold text-[16px]">My Services</p>
     </a>
@@ -90,7 +92,7 @@
   <div class="shadow-lg border border-gray-300 bg-slate-200 rounded-lg hover:shadow-xl active:bg-gray-300 py-5">
     <a href="" class="flex flex-col items-center">
       <div class="w-20 h-24">
-        <img src="{{asset('build/assets/icons/message.png')}}" alt="">
+        <img src="{{asset('storage/icons/message.png')}}" alt="">
       </div>
       <p class="font-semibold text-[16px]">My Messages</p>
     </a>
@@ -99,7 +101,7 @@
   <div class="shadow-lg border border-gray-300 bg-slate-200 rounded-lg hover:shadow-xl active:bg-gray-300 py-5">
     <a href="{{route('professional.gallery.index')}}" class="flex flex-col items-center">
       <div class="w-20 h-24">
-        <img src="{{asset('build/assets/icons/gallery.png')}}" alt="">
+        <img src="{{asset('storage/icons/gallery.png')}}" alt="">
       </div>
       <p class="font-semibold text-[16px]">Gallery</p>
     </a>

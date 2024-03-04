@@ -9,8 +9,8 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles()
     </head>
     <body>
         <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-slate-200 font-roboto">
@@ -32,5 +32,6 @@
                 </main>
             </div>
         </div>
+        @livewireScripts()
     </body>
 </html>

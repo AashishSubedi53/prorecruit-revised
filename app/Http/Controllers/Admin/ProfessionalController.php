@@ -137,6 +137,7 @@ class ProfessionalController extends Controller
      */
     public function destroy(Professional $professional)
     {
+        dd($professional);
         $professional -> delete();
         return redirect()->back()->with('success', 'Professional is deleted !');
     }

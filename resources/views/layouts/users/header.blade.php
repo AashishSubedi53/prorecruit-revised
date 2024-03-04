@@ -1,4 +1,4 @@
-  <div class="flex flex-row justify-between px-20 align-text-top">
+  <div class="flex flex-row justify-between align-text-top">
     <div class="left">
       <!-- <img src="{{asset('logo')}}" alt="logo"> -->
       <!-- <a href="{{route('home')}}"> -->
@@ -69,10 +69,3 @@
 
   @endauth
   </div>  
-
-  <div class="bg-blue-700 text-center text-white mb-10 text-[26px] font-semibold">
-    <h3 class="mt-10">
-      @yield('title')
-    </h3>
-  </div>
-
