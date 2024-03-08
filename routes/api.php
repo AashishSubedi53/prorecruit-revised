@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Professional\Services\Index;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

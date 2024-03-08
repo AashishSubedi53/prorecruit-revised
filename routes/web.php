@@ -22,6 +22,8 @@ use App\Http\Controllers\Professional\GalleryController;
 use App\Http\Controllers\Professional\OrderController as ProfessionalOrderController;
 use App\Http\Controllers\Professional\ProfessionalServiceController;
 use App\Http\Controllers\Professional\ProfileController as ProfessionalProfileController;
+use App\Livewire\Customer\ProfessionalDetails;
+use App\Livewire\Customer\SearchProfessionals;
 use App\Livewire\Professional\Services;
 use App\Livewire\Professional\Services\CreateServices;
 use App\Livewire\Professional\Services\EditServices;
@@ -127,8 +129,10 @@ require __DIR__.'/auth.php';
 
 Route::group(['prefix' => 'customer', 'as' => 'customer.'], function(){
     Route::resource('my-profile', CustomerProfileController::class);
-    Route::resource('search-professional', CustomerHomeController::class);
-    Route::resource('professional-details', ProfessionalDetailsController::class);
+    // Route::resource('search-professional', CustomerHomeController::class);
+    Route::get('search-professionals', SearchProfessionals::class)->name('search-professionals.index');
+    // Route::resource('professional-details', ProfessionalDetailsController::class);
+    Route::get('/professional-details', ProfessionalDetails::class)->name('professional-details.index');
     
 
 });

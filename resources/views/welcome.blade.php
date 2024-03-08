@@ -1,11 +1,18 @@
 @extends('layouts.users.app')
 
-@section('title')
+   
+  
+
+@section('content')
+@push('script')
+  @vite('resources/js/app.js')
+@endpush
+
 @auth    
-Welcome,&nbsp;<span>{{auth()->user()->username}}</span>
+{{-- Welcome,&nbsp;<span>{{auth()->user()->username}}</span> --}}
 
   @if(auth()->user()->user_type==='customer')
-  <form class="max-w-md mx-auto mb-5 mt-10" action="{{route('customer.search-professional.index')}}">   
+  <form class="max-w-md mx-auto mb-5 mt-10" action="{{route('customer.search-professionals.index')}}">   
       <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
       <div class="relative">
           <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -18,11 +25,7 @@ Welcome,&nbsp;<span>{{auth()->user()->username}}</span>
       </div>
   </form>
   @endif
-@endauth    
-  
-@endsection
-
-@section('content')
+@endauth 
 
 <div class="bg-slate-200">
   <div class="flex justify-center space-x-12 p-10 text-center">
@@ -178,11 +181,11 @@ Welcome,&nbsp;<span>{{auth()->user()->username}}</span>
 <div class="testimonials">
     <h1 class="text-3xl font-semibold text-center mb-5">Testimonials</h1>
 
-    <div id="testimonial-carousel" class="relative w-1/2 mx-auto" data-carousel="slide">
+    <div id="testimonial-carousel" class="relative w-1/2 mx-auto" data-carousel="static">
         <!-- Carousel wrapper -->
         <div class="relative overflow-hidden rounded-lg md:h-64">
             @foreach ($testimonials as $key => $testimonial)
-                <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+                <div class="hidden duration-300" data-carousel-item>
                     <div class="p-5 w-full rounded-lg border border-gray-100 shadow-lg space-y-2">
                         <div class="text-justify text-[12px] text-gray-500 text-xl">
                             <p>{{ $testimonial->description }}</p>

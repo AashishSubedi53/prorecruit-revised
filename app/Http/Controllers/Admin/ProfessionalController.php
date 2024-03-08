@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Professional;
+use App\Models\ProfessionalAddress;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class ProfessionalController extends Controller
@@ -36,12 +38,16 @@ class ProfessionalController extends Controller
             'first_name' => ['required'],
             'last_name' => ['required'],
             'username' => ['required'],
-            'address' => ['required'],
             'phonenumber' => ['required'],
             'profile_image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'email' => ['required', 'unique:users,email'],
             'password' => ['required'],
-            'user_type' => ['required']
+            'user_type' => ['required'],
+            'address_line_1' => ['required'],
+            'address_line_2' => ['required'],
+            'province' => ['required'],
+            'city' => ['required'],
+            'postal_code' => ['required'],
         ]);
 
         $sanitized['password'] = Hash::make($sanitized['password']);
@@ -59,13 +65,22 @@ class ProfessionalController extends Controller
             $sanitized['profile_image'] = $imagePath;
         }
 
-        Professional::create([
+        $professional = Professional::create([
             'user_id' => $sanitized['user_id'],
             'first_name' => $sanitized['first_name'],
             'last_name' => $sanitized['last_name'],
-            'address' => $sanitized['address'],
             'phonenumber' => $sanitized['phonenumber'],
             'profile_image' => $sanitized['profile_image']
+        ]);
+
+        $sanitized['professional_id'] = $professional->id;
+        ProfessionalAddress::create([
+            'professional_id' => $sanitized['professional_id'],
+            'address_line_1' => $sanitized['address_line_1'],
+            'address_line_2' => $sanitized['address_line_2'],
+            'province' => $sanitized['province'],
+            'city' => $sanitized['city'],
+            'postal_code' =>  $sanitized['postal_code']
         ]);
 
         return redirect()->route('admin.professionals.index')->with('success', 'A Professional is added !');
@@ -84,8 +99,8 @@ class ProfessionalController extends Controller
      */
     public function edit(Professional $professional)
     {
-        
-        return view('admin.professionals.edit', compact('professional'));
+        $provinceOptions = ['Province 1', 'Madhesh Pradesh', 'Bagmati Province', 'Gandaki', 'Lumbini', 'Karnali', 'Sudurpaschim'];        
+        return view('admin.professionals.edit', compact(['professional', 'provinceOptions']));
     }
 
     /**
@@ -97,12 +112,16 @@ class ProfessionalController extends Controller
             'first_name' => ['required'],
             'last_name' => ['required'],
             'username' => ['required'],
-            'address' => ['required'],
             'phonenumber' => ['required'],
             'profile_image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'email' => ['required', 'unique:users,email,' . $professional->user_id],
             'password' => ['required'],
-            'user_type' => ['required']
+            'user_type' => ['required'],
+            'address_line_1' => ['required'],
+            'address_line_2' => ['required'],
+            'province' => ['required'],
+            'city' => ['required'],
+            'postal_code' => ['required'],
         ]);
         
         $sanitized['password'] = Hash::make($sanitized['password']);
@@ -120,8 +139,15 @@ class ProfessionalController extends Controller
             // 'user_id' => $sanitized['user_id'],
             'first_name' => $sanitized['first_name'],
             'last_name' => $sanitized['last_name'],
-            'address' => $sanitized['address'],
             'phonenumber' => $sanitized['phonenumber'],
+        ]);
+
+        $professional->address->update([
+            'address_line_1' => $sanitized['address_line_1'],
+            'address_line_2' => $sanitized['address_line_2'],
+            'province' => $sanitized['province'],
+            'city' => $sanitized['city'],
+            'postal_code' =>  $sanitized['postal_code']
         ]);
         
         if ($request->hasFile('profile_image')) {
@@ -137,7 +163,6 @@ class ProfessionalController extends Controller
      */
     public function destroy(Professional $professional)
     {
-        dd($professional);
         $professional -> delete();
         return redirect()->back()->with('success', 'Professional is deleted !');
     }

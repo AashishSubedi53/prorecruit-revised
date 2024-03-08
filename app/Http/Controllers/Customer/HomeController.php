@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('customer.search-professional.index');
+        // return view('customer.search-professional.index');
     }
 
     /**

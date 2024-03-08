@@ -17,4 +17,3 @@ document.addEventListener("alpine:init", ()=> {
   });
 
 Alpine.start();
-

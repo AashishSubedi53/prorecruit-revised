@@ -12,7 +12,7 @@ class ProfessionalDetailsController extends Controller
      */
     public function index()
     {
-        return view('customer.professional-details.index');
+        // return view('customer.professional-details.index');
     }
 
     /**

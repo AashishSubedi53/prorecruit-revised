@@ -72,7 +72,7 @@ class ServiceCategoryController extends Controller
     public function update(Request $request, ServiceCategory $serviceCategory)
     {
         $sanitized = $request->validate([
-            'category_name' => ['required', 'string', 'unique:service_categories,category_name'],
+            'category_name' => ['required', 'string', 'unique:service_categories,category_name,'. $serviceCategory->id],
             'image' => ['image', 'mimes:png,jpg,jpeg', 'max:2048']            
         ]);
 

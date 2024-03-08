@@ -26,4 +26,8 @@ class Professional extends Model
     public function service(){
         return $this->hasMany(ProfessionalService::class);
     }
+
+    public function address(){
+        return $this->hasOne(ProfessionalAddress::class);
+    }
 }

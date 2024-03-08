@@ -170,7 +170,7 @@ Professional Details
             </button>
         </div>
     </div>
-</div>
+  </div>
 
 
 <!-- reviews -->

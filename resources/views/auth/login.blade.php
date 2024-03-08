@@ -1,5 +1,7 @@
 @extends('layouts.users.app')
-
+@push('script')
+  @vite('resources/js/app.js')
+@endpush
 @section('title')
     Login
 @endsection
@@ -8,7 +10,7 @@
     
     <section class="grid grid-cols-2 gap-5 mx-20 my-20">
         <div class="ml-40">
-            <img src="{{asset('build/assets/images/cleaning.png')}}" alt="image" height="400px" width="400px">
+            <img src="{{asset('storage/images/cleaning.png')}}" alt="image" height="400px" width="400px">
         </div>
 
         <!-- Session Status -->
@@ -81,7 +83,7 @@
 
     <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="w-full flex items-center justify-between px-4 py-2 border border-gray-500 rounded-lg">
         <div class="flex items-center">
-            <img class="inline-block" src="{{asset('build/assets/logo/continue-with-google.png')}}" alt="">
+            <img class="inline-block" src="{{asset('storage/logo/continue-with-google.png')}}" alt="">
         </div>
         <svg class="w-10 h-10" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
             <path stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>

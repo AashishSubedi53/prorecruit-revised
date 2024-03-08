@@ -60,7 +60,8 @@ class EditServices extends Component
             'price' => $this->price,
             'description' => $this->serviceDescription,
         ]);
-        session()->flash('message', 'Service updated successfully!');
+        session()->flash('success', 'Service updated successfully!');
+        // return redirect()->route('professional.my-services.index');
         // $this->mount($proService);
        
 

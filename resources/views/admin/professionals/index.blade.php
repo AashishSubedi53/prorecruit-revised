@@ -43,12 +43,23 @@
                     Email
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Address
+                    Address Line 1
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Address Line 2
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Province
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    City
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Postal Code
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Phone Number
-                </th>
-                
+                </th>                
                 <th scope="col" class="px-6 py-3">
                     Registered At
                 </th>
@@ -87,7 +98,19 @@
                     {{$professional->user->email}}
                 </td>
                 <td class="px-6 py-4">
-                    {{$professional->address}}
+                    {{$professional->address->address_line_1}}
+                </td>
+                <td class="px-6 py-4">
+                    {{$professional->address->address_line_2}}
+                </td>
+                <td class="px-6 py-4">
+                    {{$professional->address->province}}
+                </td>
+                <td class="px-6 py-4">
+                    {{$professional->address->city}}
+                </td>
+                <td class="px-6 py-4">
+                    {{$professional->address->postal_code}}
                 </td>
                 <td class="px-6 py-4">
                     {{$professional->phonenumber}}

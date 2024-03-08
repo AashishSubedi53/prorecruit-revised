@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('address');
             $table->string('phonenumber');
             $table->longText('profile_image')->nullable()->default('/profile-images/default-profile.png');
             $table->string('payment_methods')->nullable();
+            $table->string('PAN')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
