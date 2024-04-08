@@ -14,4 +14,8 @@ class Customer extends Model
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function ratingAndReview(){
+        return $this->hasMany(RatingAndReview::class);
+    }
 }

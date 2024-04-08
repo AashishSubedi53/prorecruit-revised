@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Customer\HomeController as CustomerHomeController;
 use App\Http\Controllers\Customer\ProfessionalDetailsController;
 use App\Http\Controllers\Customer\ProfessionalSearchController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\Professional\GalleryController;
 use App\Http\Controllers\Professional\OrderController as ProfessionalOrderController;
 use App\Http\Controllers\Professional\ProfessionalServiceController;
 use App\Http\Controllers\Professional\ProfileController as ProfessionalProfileController;
+use App\Livewire\Checkout;
 use App\Livewire\Customer\ProfessionalDetails;
 use App\Livewire\Customer\SearchProfessionals;
 use App\Livewire\Professional\Services;
@@ -81,6 +83,8 @@ Route::get('/contact', function(){
     return view('contact');
 })->name('contact');
 
+Route::post('/contact', [ContactController::class, 'sendContactForm'])->name('contact-submit');
+
 Route::get('/admin/dashboard/stats', [DashboardController::class, 'getStats']);
 
 
@@ -132,7 +136,9 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function(){
     // Route::resource('search-professional', CustomerHomeController::class);
     Route::get('search-professionals', SearchProfessionals::class)->name('search-professionals.index');
     // Route::resource('professional-details', ProfessionalDetailsController::class);
-    Route::get('/professional-details', ProfessionalDetails::class)->name('professional-details.index');
+    Route::get('/professional-details/{professional}', ProfessionalDetails::class)->name('professional-details.index');
+
+    Route::get('/checkout', Checkout::class)->name('checkout');
     
 
 });

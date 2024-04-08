@@ -45,7 +45,7 @@ Profile Settings
 
         <div>
           <label for="address" class="text-gray-500 text-xl font-semibold">Address</label>
-          <p id="address" class="font-semibold">{{auth()->user()->professional->address}}</p>
+          <p id="address" class="font-semibold">{{auth()->user()->professional->address->address_line_1}}</p>
         </div>
 
         <div>

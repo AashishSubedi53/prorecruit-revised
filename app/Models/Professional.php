@@ -30,4 +30,8 @@ class Professional extends Model
     public function address(){
         return $this->hasOne(ProfessionalAddress::class);
     }
+
+    public function ratingAndReview(){
+        return $this->hasMany(RatingAndReview::class, 'professional_id');
+    }
 }

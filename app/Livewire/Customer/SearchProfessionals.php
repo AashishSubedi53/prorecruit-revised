@@ -14,6 +14,8 @@ class SearchProfessionals extends Component
     public $services = [];
     public $selectedServices = [];
     public $selectedLocation;
+    public $enteredService;
+    public $proServiceId;
 
 
 
@@ -21,7 +23,26 @@ class SearchProfessionals extends Component
         // $this->professionalServices = ProfessionalService::all();
         $this->professionalServices = ProfessionalService::with('professional.user', 'professional.address')->get();
         $this->services = Service::all();
+        $this->enteredService = session('enteredService');
+        $this->checkSelectedServices();
+
+        if ($this->enteredService) {
+            $this->filterByService();
+        }
     } 
+    
+
+    public function checkSelectedServices()
+    {
+        // Assuming $this->enteredService contains the service name
+        // Fetch the corresponding service_id from the database
+        $service = Service::where('service_name', $this->enteredService)->first();
+
+        // If the service is found, set it as a selected service
+        if ($service) {
+            $this->selectedServices = [$service->id];
+        }
+    }
 
     public function filterByService()
     {
@@ -31,17 +52,6 @@ class SearchProfessionals extends Component
             })
             ->get();
     }
-
-    // public function filterByLocation()
-    // {
-    //     $this->professionalServices = ProfessionalService::with('professional.user', 'professional.address')
-    //         ->when($this->selectedLocation, function ($query, $selectedLocation) {
-    //             return $query->whereHas('professional.address', function ($addressQuery) use ($selectedLocation) {
-    //                 $addressQuery->whereIn('city', $selectedLocation);
-    //             });
-    //         })
-    //         ->get();
-    // }
 
     public function filterByLocation()
     {
@@ -65,8 +75,6 @@ class SearchProfessionals extends Component
 
         $this->reset('selectedLocation');
     }
-
-
 
 
     public function render()

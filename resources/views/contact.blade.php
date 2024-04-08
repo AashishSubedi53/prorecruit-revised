@@ -7,15 +7,16 @@
 
 <section id="form" class="grid grid-cols-2 gap-10 my-5 mx-10">
   <div class="left">
-    <form action="">
+    <form action="{{route('contact-submit')}}" method="post">
+      @csrf
     <div class="grid grid-cols-2 mb-2 gap-2">
-      <input type="text" placeholder="First Name">
-      <input type="text" placeholder="Last Name">
-      <input type="text" placeholder="Email">
-      <input type="text" placeholder="Phone Number">
+      <input type="text" name="first_name" placeholder="First Name">
+      <input type="text" name="last_name" placeholder="Last Name">
+      <input type="email" name="email" placeholder="Email">
+      <input type="text" name="phone_number" placeholder="Phone Number">
     </div>
     <div>
-      <textarea name="" rows="10" placeholder="Message" class="w-full"></textarea>
+      <textarea name="message" rows="10" placeholder="Message" class="w-full"></textarea>
     </div>
     <input type="submit" value="Submit" class="text-center text-white font-semibold bg-blue-500 w-full p-2">
     </form> 

@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         // calling AdminAccount.php seeding
         $this->call(AdminAccount::class);
         $this->call(SiteSettings::class);
+        $this->call(ProfessionalAccount::class);
     }
 }

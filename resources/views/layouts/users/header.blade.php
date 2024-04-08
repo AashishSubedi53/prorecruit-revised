@@ -47,7 +47,7 @@
             @elseif(auth()->user()->user_type === 'professional' && auth()->user()->professional->profile_image != null)
             <img src="{{ asset('storage/' . auth()->user()->professional->profile_image)}}" alt="" class="h-full w-full rounded-full">
            @elseif(auth()->user()->user_type === 'customer' && auth()->user()->customer->profile_image === null)
-           <img src="{{asset('build/assets/images/default-profile.png')}}" alt="">
+           <img src="{{asset('storage/images/default-profile.png')}}" alt="">
             @endif
           </div>
         </a>

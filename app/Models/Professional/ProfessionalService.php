@@ -3,6 +3,7 @@
 namespace App\Models\Professional;
 
 use App\Models\Professional;
+use App\Models\RatingAndReview;
 use App\Models\Service as ModelsService;
 use App\Models\ServiceCategory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,5 +29,14 @@ class ProfessionalService extends Model
     {
         return $this->belongsTo(ModelsService::class, 'service_id');
     }
+
+    public function ratingAndReview(){
+        return $this->hasMany(RatingAndReview::class, 'professional_service_id');
+    }
+
+    // public function service()
+    // {
+    //     return $this->belongsTo(Service::class);
+    // }
 
 }
