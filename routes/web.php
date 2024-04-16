@@ -159,3 +159,8 @@ Route::group(['prefix' => 'professional', 'as' => 'professional.'], function(){
 });
 
 
+// stripe
+// Route::get('/checkout', [Checkout::class, 'StripeCheckout'])->name('checkout');
+// Route::post('/session', [Checkout::class, 'session'])->name('session');
+Route::get('/success', [Checkout::class, 'success'])->name('success');
+

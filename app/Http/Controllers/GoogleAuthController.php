@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Throwable;
 
@@ -32,7 +33,8 @@ class GoogleAuthController extends Controller
                 $new_user = User::create([
                     'username' => $google_user->getName(),
                     'email' => $google_user->getEmail(),
-                    'google_id'=> $google_user->getId(),  
+                    'google_id'=> $google_user->getId(), 
+                    'password' => Hash::make('password'), 
                     'user_type' => session('user_type'),
                         
                     
@@ -40,6 +42,7 @@ class GoogleAuthController extends Controller
 
                 if(session('user_type') === 'customer'){
                     Customer::create([
+                        'user_id' => $new_user->id,
                         'profile_image'
                     ]);
                 }else{
@@ -52,7 +55,8 @@ class GoogleAuthController extends Controller
                 // if(session('user_type')==='customer'){
                 //     return redirect()->route('home');
                 // }
-                return redirect(RouteServiceProvider::redirectTo());
+                // return redirect(RouteServiceProvider::redirectTo());
+                return redirect()->route('home');
                 
             } else{
                 Auth::login($user); 

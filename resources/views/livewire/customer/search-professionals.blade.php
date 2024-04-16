@@ -82,11 +82,11 @@
         @endforeach    
         </div>
         <x-modal name="book-now-fields" :show="$errors->first()">
-            <form action="" class="p-6 w-3/4 flex flex-col space-y-3">
+            <form wire:submit.prevent="submit" class="p-6 w-3/4 flex flex-col space-y-3">
                 <h2 class="text-xl font-bold mb-4">
                     Booking Details
                 </h2>
-                {{-- <input wire:model="proServiceId" type="text"> --}}
+                <input wire:model="proServiceId" type="text" hidden>               
 
                 
             <div class="relative">
@@ -96,7 +96,7 @@
                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                 </svg>
                 </div>
-                <input datepicker id="bookingDate" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                <input datepicker wire:model="bookingDate" id="bookingDate" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
             </div>
 
             <div class="relative">
@@ -107,47 +107,48 @@
                     </svg>
                 </div>
                 {{-- <input type="time" id="time" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" min="09:00" max="18:00" value="00:00" required /> --}}
-                <input type="time" id="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  min="09:00" max="18:00" value="00:00" required />
+                <input type="time" wire:model="bookingTime" id="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  min="09:00" max="18:00" value="00:00" required />
             </div>
 
-            <label for="paymentMode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Payment Mode</label>
+            {{-- <label for="paymentMode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Payment Mode</label>
             <select id="paymentMode" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="Select Payment Mode" selected disabled>Select Payment Mode</option>
                 <option value="Stripe">Stripe</option>
                 <option value="Khalti">Khalti</option>
-            </select>
+            </select> --}}
 
             <div>
                 <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-                <input type="text" id="address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                <input type="text" wire:model="address" id="address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
             </div>
             <div>
                 <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
-                <input type="text" id="city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                <input type="text" wire:model="city" id="city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
             </div>
             <div>
                 <label for="pin_code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PIN Code</label>
-                <input type="text" id="pin_code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                <input type="text" wire:model="pin_code" id="pin_code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
             </div>
 
             
             <div>
-                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Additional Details</label>
-                <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your additional booking details here..."></textarea>
+                <label for="additionalDetails" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Additional Details</label>
+                <textarea id="additionalDetails" wire:model="additionalDetails" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your additional booking details here..."></textarea>
             </div>
-
-
-            </form>
 
             <div class="flex space-x-1 px-6 mb-3">
                 <button x-on:click="$dispatch('close')" class="bg-rose-700 text-white px-4 py-2 rounded-md">
                     {{ __('Cancel') }}
                 </button>
 
-                <a class="bg-blue-700 text-white p-2 rounded-md" href="{{route('customer.checkout')}}">
-                    Checkout
-                </a>
+                <button wire:click="submit"  class="bg-blue-700 text-white p-2 rounded-md cursor-pointer">
+                    Submit
+                </button>
             </div>
+
+            </form>
+
+            
         </x-modal>  
       </div>
 </div>

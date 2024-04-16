@@ -15,7 +15,18 @@ class SearchProfessionals extends Component
     public $selectedServices = [];
     public $selectedLocation;
     public $enteredService;
-    public $proServiceId;
+
+    public $proServiceId;    
+
+
+    // modal properties
+    public $bookingDetails;
+    public $bookingDate;
+    public $bookingTime;
+    public $address;
+    public $city;
+    public $pin_code;
+    public $additionalDetails;
 
 
 
@@ -30,6 +41,28 @@ class SearchProfessionals extends Component
             $this->filterByService();
         }
     } 
+
+    public function submit(){
+        $this->bookingDetails = [
+            "bookingDate" => $this->bookingDate,
+            "bookingTime" => $this->bookingTime,
+            "address" => $this->address,
+            "city" => $this->city,
+            "pin_code" => $this->pin_code,
+            "additionalDetails" => $this->additionalDetails,
+            // "proServiceId" => $this->proServiceId
+        ];
+
+        session(['proServiceId' => $this->proServiceId]);
+
+        $this->sessionStorage();
+        return redirect()->route('customer.checkout');
+
+    }
+
+    public function sessionStorage(){
+        return session(['bookingDetails' => $this->bookingDetails]);
+    }
     
 
     public function checkSelectedServices()

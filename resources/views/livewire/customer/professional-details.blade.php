@@ -66,14 +66,14 @@
                   </select>
                 </div>
     
-                <div>
+                {{-- <div>
                   <label for="paymentMode" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Select Payment Mode</label>
                   <select id="paymentMode" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                       <option value="Select Payment Mode" selected disabled>Select Payment Mode</option>
                       <option value="Stripe">Stripe</option>
                       <option value="Khalti">Khalti</option>
                   </select>
-                </div>
+                </div> --}}
     
                 <div>
                     <label for="address" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Address</label>
@@ -103,7 +103,7 @@
                     </button>
     
                     <a class="bg-blue-700 text-white p-2 rounded-md" href="{{route('customer.checkout')}}">
-                        Checkout
+                        Submit
                     </a>
                 </div>
             </x-modal> 
