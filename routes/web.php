@@ -24,6 +24,7 @@ use App\Http\Controllers\Professional\OrderController as ProfessionalOrderContro
 use App\Http\Controllers\Professional\ProfessionalServiceController;
 use App\Http\Controllers\Professional\ProfileController as ProfessionalProfileController;
 use App\Livewire\Checkout;
+use App\Livewire\Customer\MyBookings;
 use App\Livewire\Customer\ProfessionalDetails;
 use App\Livewire\Customer\SearchProfessionals;
 use App\Livewire\Professional\Services;
@@ -139,6 +140,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function(){
     Route::get('/professional-details/{professional}', ProfessionalDetails::class)->name('professional-details.index');
 
     Route::get('/checkout', Checkout::class)->name('checkout');
+    Route::get('/my-bookings', MyBookings::class)->name('my-bookings');
     
 
 });

@@ -32,6 +32,12 @@
     @auth
     <div class="right">
       <ul class="flex space-x-3 text-center">
+
+        
+        @if(auth()->user()->user_type==='customer')
+          <a href="{{route('customer.my-bookings')}}">My Bookings</a>
+        @endif
+        
         <a href="
         @if(auth()->user()->user_type==='customer')
           {{route('customer.my-profile.index')}}

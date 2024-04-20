@@ -4,7 +4,9 @@
 @endsection
 
 @section('content')
-
+@push('script')
+  @vite('resources/js/app.js')
+@endpush
 <div class="p-5">
   <div class="mb-4 mt-10 p-5 inline-flex overflow-hidden w-full bg-white rounded-lg shadow-md">
       <div class="flex justify-center items-center w-12 bg-blue-500">
@@ -22,7 +24,7 @@
   </div>
 </div>
 
-<div class="relative overflow-x-auto mb-10 p-10">
+{{-- <div class="relative overflow-x-auto mb-10 p-10">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -114,9 +116,11 @@
             </tr>            
         </tbody>
     </table>
+</div> --}}
+
+<div class="relative overflow-x-auto mb-10 p-10">
+    @livewire('my-orders')
 </div>
-
-
 
   
 @endsection

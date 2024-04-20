@@ -2,12 +2,17 @@
 
 namespace App\Livewire;
 
+use App\Models\Order;
+use App\Models\Payment;
 use App\Models\Professional\ProfessionalService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Route as FacadesRoute;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Stripe\Checkout\Session as CheckoutSession;
@@ -21,6 +26,13 @@ class Checkout extends Component
 
     // received from the modal
     public $proServiceId;
+    public $bookingDate;
+    public $bookingTime;
+    public $address;
+    public $city;
+    public $pin_code;
+    public $additionalDetails;
+
 
     public $service_name;
     public $service_price;
@@ -36,6 +48,13 @@ class Checkout extends Component
     public function mount()
     {
         $this->sessionReceiption();
+        $this->bookingDate = $this->receivedBookingDetails['bookingDate'];
+        $this->bookingTime = $this->receivedBookingDetails['bookingTime'];
+        $this->address = $this->receivedBookingDetails['address'];
+        $this->city = $this->receivedBookingDetails['city'];
+        $this->pin_code = $this->receivedBookingDetails['pin_code'];
+        $this->additionalDetails = $this->receivedBookingDetails['additionalDetails'];
+        // dd($this->bookingDate, $this->bookingTime, $this->address, $this->city, $this->pin_code, $this->additionalDetails);
         // $this->proServiceId = $this->receivedBookingDetails['proServiceId'];
         $this->proServiceId = session('proServiceId');
         $this->proService = ProfessionalService::where('id',$this->proServiceId)->first();
@@ -46,11 +65,12 @@ class Checkout extends Component
         $this->serviceCharge = $this->service_price * 0.05;
         $this->totalCharge = $this->service_price + $this->totalProcessingFee + $this->totalTax + $this->serviceCharge;
 
+
         // dd($this->proService);
+        // dd(FacadesRoute::currentRouteName());
 
     }
 
-    // calculations
     
 
 
@@ -124,10 +144,9 @@ class Checkout extends Component
         Stripe::setApiKey(config('stripe.sk'));
 
         $service_name = $this->service_name;
-        $total_charge = $this->totalCharge;
-        // $total_charge = '500';
-        $two0 = "00";
-        $total = "$total_charge$two0";
+        $total_charge = round($this->totalCharge);
+        $two0 = '00';
+        $total = $total_charge.$two0;
 
         $session = CheckoutSession::create([
             'line_items' => [
@@ -143,19 +162,47 @@ class Checkout extends Component
                 ],
             ],
             'mode' => 'payment',
-            'success_url' => route('home'),
+            'success_url' => route('customer.my-bookings'),
             'cancel_url' =>route('customer.checkout'),
             ]);
 
-        $message = '';
-        if (FacadesRoute::currentRouteName() === 'home') {
-            $message = 'Payment Successful!!';
-        } elseif (FacadesRoute::currentRouteName() === 'customer.checkout') {
-            $message = 'Payment failed!!';
-        }
+        // $message = '';
+        // if (FacadesRoute::currentRouteName() === 'home') {
+        //     $message = 'Payment Successful!!';
+        // } elseif (FacadesRoute::currentRouteName() === 'customer.checkout') {
+        //     $message = 'Payment failed!!';
+        // }
 
     // Flashing message to session
-    Session::flash('message', $message);
+    // Session::flash('message', $message);
+
+    // if(FacadesRoute::currentRouteName() === 'customer.checkout'){
+    //     dd('hello');
+        $payment = Payment::create([
+            'payment_status' => 'paid',
+            'payment_method' => 'Stripe Payment',
+            'payment_amount' => $total,
+            'refund_amount' => 0
+
+        ]);
+
+        $order = Order::create([
+            'customer_id' => Auth::user()->customer->id,
+            'professionalService_id' => $this->proService->id,
+            'professional_id' => $this->proService->professional_id,
+            'payment_id' => $payment->id,
+            'bookingDate' => $this->bookingDate,
+            'bookingTime' => $this->bookingTime,
+            'bookingAddress' => $this->address,
+            'city' => $this->city,
+            'pin_code' => $this->pin_code,
+            'additionalDetails' => $this->additionalDetails,
+            'order_status' => 'Awaiting Completion'
+
+        ]);
+
+
+    // }
 
             return redirect()->away($session->url);
     }

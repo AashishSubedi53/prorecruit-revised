@@ -1,4 +1,10 @@
 import './bootstrap';
+
+// for powergrid datatable
+import './../../vendor/power-components/livewire-powergrid/dist/powergrid' 
+import './../../vendor/power-components/livewire-powergrid/dist/tailwind.css'
+
+
 import 'flowbite';
 import Alpine from 'alpinejs';
 window.Alpine = Alpine;

@@ -2,6 +2,7 @@
 
 namespace App\Models\Professional;
 
+use App\Models\Order;
 use App\Models\Professional;
 use App\Models\RatingAndReview;
 use App\Models\Service as ModelsService;
@@ -32,6 +33,10 @@ class ProfessionalService extends Model
 
     public function ratingAndReview(){
         return $this->hasMany(RatingAndReview::class, 'professional_service_id');
+    }
+
+    public function order(){
+        return $this->hasMany(Order::class);
     }
 
     // public function service()
