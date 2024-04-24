@@ -25,7 +25,7 @@
             <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700">Search</button>
         </div>
     </form> --}}
-    @livewire('customer.search-box');
+    @livewire('customer.search-box')
   </div>
   @endif
 @endauth 
@@ -182,7 +182,7 @@
 </div>
 
 <div class="testimonials">
-    <h1 class="text-3xl font-semibold text-center mb-5">Testimonials</h1>
+    <h1 class="text-3xl font-semibold text-center mb-5 mt-10">Testimonials</h1>
 
     <div id="testimonial-carousel" class="relative w-1/2 mx-auto" data-carousel="static">
         <!-- Carousel wrapper -->

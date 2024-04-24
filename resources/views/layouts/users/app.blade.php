@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>{{env('APP_NAME')?? 'Pro-Recruit'}}</title>
+  {{-- KHALTI --}}
+  <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
   @livewireStyles()
   {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
   @vite('resources/css/app.css')

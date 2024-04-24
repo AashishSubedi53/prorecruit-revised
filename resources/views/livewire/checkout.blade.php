@@ -1,3 +1,7 @@
+{{-- <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script> --}}
+@push('script')
+  @vite('resources/js/app.js')
+@endpush
 
 <div class="bg-slate-100">
     <div class="py-5 px-3 bg-blue-700 text-center">
@@ -53,14 +57,39 @@
                     </tr>
                 </tbody>
             </table>
-            <form wire:submit="KhaltiVerification"> 
-                {{-- <input type="text" wire:model="totalCharge" > --}}
-                <button class="bg-purple-600 text-white font-semibold px-4 py-2 mt-4 w-full rounded-b-md">Pay Via Khalti</button>  
+            <form action="{{ route('khalti.payment') }}" method="post">
+                @csrf
+                {{-- <button class="bg-purple-600 text-white font-semibold px-4 py-2 mt-4 w-full rounded-b-md">Pay Via Khalti</button>   --}}
+                <button class="bg-purple-600 text-white font-semibold px-4 py-2 mt-4 w-full rounded-b-md">
+                    <div class="">
+                        <img class="w-1/2 mx-auto h-10 object-contain" src="{{asset('storage/logo/button_khalti.png')}}" alt="">
+                    </div>
+                </button>  
+
             </form>
-            <form wire:submit="session"> 
+
+
+            {{-- <form wire:submit="KhaltiVerification">  --}}
                 {{-- <input type="text" wire:model="totalCharge" > --}}
-                <button class="bg-blue-600 text-white font-semibold px-4 py-2 mt-4 w-full rounded-b-md">Pay Via Stripe</button>  
-            </form>
+                {{-- <button class="bg-purple-600 text-white font-semibold px-4 py-2 mt-4 w-full rounded-b-md">Pay Via Khalti</button>   --}}
+            {{-- </form> --}}
+
+
+            {{-- <form wire:submit.prevent="session">  --}}
+                {{-- <input type="text" wire:model="totalCharge" > --}}
+                {{-- <button class="bg-blue-600 text-white font-semibold px-4 py-2 mt-4 w-full rounded-b-md">Pay Via Stripe</button>   --}}
+            {{-- </form> --}}
+
+            {{-- <button wire:click="KhaltiVerification" class="bg-purple-600 text-white font-semibold px-4 py-2 mt-4 w-full rounded-b-md">Pay Via Khalti</button>   --}}
+            <button wire:click="session" class="bg-gray-300 text-white font-semibold px-4 py-2 mt-4 w-full rounded-b-md">
+                <div>
+                    <img class="w-1/2 mx-auto h-10 object-contain" src="{{asset('storage/logo/Stripe-button.png')}}" alt="">
+                </div>
+            </button>  
+
+           
+
+
                 
     
         </div>

@@ -80,4 +80,5 @@
         </tbody>
     </table>
 </div>
+{{$services->links()}}
 </x-app-layout>

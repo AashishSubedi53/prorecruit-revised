@@ -58,9 +58,9 @@ class CreateServices extends Component
             'professional_id' => auth()->user()->professional->id,
         ]);
         $this->reset();
-        // return redirect()->route('professional.my-services.index');
+        return redirect()->route('professional.my-services.index')->with('success', 'Service added successfully!!');
 
-        session()->flash('success', 'Services added successfully!!');        
+        // session()->flash('success', 'Services added successfully!!');        
     }
 
     public function render()

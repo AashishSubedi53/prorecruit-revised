@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Professional;
+use App\Models\SiteSetting;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -25,9 +26,13 @@ class RegisteredUserController extends Controller
         $userType = $request->input('user_type', 'customer');
 
         if ($userType === 'professional') {
-            return view('auth.register-professional');
+            $siteSetting = SiteSetting::first();
+            $imagePath = $siteSetting->homepage_banner;
+            return view('auth.register-professional', ['imagePath' => $imagePath]);
         } else {
-            return view('auth.register-user');
+            $siteSetting = SiteSetting::first();
+            $imagePath = $siteSetting->homepage_banner;
+            return view('auth.register-user', ['imagePath' => $imagePath]);
         }
     }
 

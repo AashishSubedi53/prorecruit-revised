@@ -10,7 +10,7 @@
     
     <section class="grid grid-cols-2 gap-5 mx-20 my-20">
         <div class="ml-40">
-            <img src="{{asset('storage/images/cleaning.png')}}" alt="image" height="400px" width="400px">
+            <img src="{{asset('storage/'. $imagePath)}}" alt="image" height="400px" width="400px">
         </div>
 
         <!-- Session Status -->

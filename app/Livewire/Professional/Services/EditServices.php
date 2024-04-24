@@ -25,7 +25,7 @@ class EditServices extends Component
         'selectedTimeFrom' => 'required',
         'selectedTimeTo' => 'required',
         'price' => 'required|numeric|gt:0',
-        'serviceDescription' => ['required', 'min:10', 'max:100'],
+        'serviceDescription' => ['required', 'min:10', 'max:500'],
     ];
 
     public function mount(ProfessionalService $proService){

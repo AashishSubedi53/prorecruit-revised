@@ -23,6 +23,16 @@ class ProfessionalDetails extends Component
     public $comments = '';
     public $totalRatings;
 
+    // modal data
+    public $bookingDetails;
+    public $bookingDate;
+    public $bookingTime;
+    public $selectedService;
+    public $address;
+    public $city;
+    public $pin_code;
+    public $additionalDetails;
+
 
     public function mount(Professional $professional){
         $this->professional = $professional;
@@ -32,6 +42,28 @@ class ProfessionalDetails extends Component
         // dd($professional->service);
         $this->averageRating = $this->calculateAverageRating();
         $this->totalRatings = $this->professional->ratingAndReview->count();
+    }
+
+    public function submit(){
+        $this->bookingDetails = [
+            "bookingDate" => $this->bookingDate,
+            "bookingTime" => $this->bookingTime,
+            "address" => $this->address,
+            "city" => $this->city,
+            "pin_code" => $this->pin_code,
+            "additionalDetails" => $this->additionalDetails,
+            // "proServiceId" => $this->proServiceId
+        ];
+
+        session(['proServiceId' => $this->selectedService]);
+
+        $this->sessionStorage();
+        return redirect()->route('customer.checkout');
+
+    }
+
+    public function sessionStorage(){
+        return session(['bookingDetails' => $this->bookingDetails]);
     }
 
     protected $rules = [

@@ -96,7 +96,7 @@ class ServiceController extends Controller
 
         
 
-        return redirect()->route('admin.services.index')->with('success', 'Service updated successfully!');
+        return redirect()->back()->with('success', 'Service updated successfully!');
     }
 
     /**

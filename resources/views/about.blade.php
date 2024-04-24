@@ -9,7 +9,7 @@ About Us
 <div class="text-justify w-1/2 mx-auto p-8">
     <div class="grid grid-cols-[400px_400px] gap-10">
         <div class="image">
-            <img src="{{asset('storage/' . $siteSettings->about_us_image)}}" alt="image" class="object-fit" height="400px" width="400px">
+            <img src="{{asset('storage/' . $siteSettings->about_us_image)}}" alt="image" class="object-cover" height="1000px" width="400px">
 
         </div>
 
@@ -20,7 +20,7 @@ About Us
 
         </div>
 
-        <!-- second image and description -->
+        {{-- <!-- second image and description -->
 
         <div class="description">
             <p>
@@ -36,7 +36,7 @@ About Us
         <div class="image">
             <img src="{{asset('build/assets/images/cleaning.png')}}" alt="image" height="400px" width="400px">
 
-        </div>
+        </div> --}}
 
     </div>
 </div>

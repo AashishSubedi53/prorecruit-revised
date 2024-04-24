@@ -91,7 +91,7 @@ class TestimonialController extends Controller
             'description' => $sanitized['description'],
         ]);       
 
-        return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial updated successfully!');
+        return redirect()->back()->with('success', 'Testimonial updated successfully!');
     }
 
     /**

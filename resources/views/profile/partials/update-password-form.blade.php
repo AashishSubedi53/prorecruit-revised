@@ -11,7 +11,6 @@
 
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
         @csrf
-        @method('put')
 
         <div>
             <x-input-label for="update_password_current_password" :value="__('Current Password')" />
@@ -41,7 +40,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                >{{ __('Password changed!!') }}</p>
             @endif
         </div>
     </form>

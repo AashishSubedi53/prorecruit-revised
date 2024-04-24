@@ -9,6 +9,7 @@
             </div>
         </div>
     </div> 
+    
     {{-- @section('content') --}}
     <div class="flex flex-col space-y-3 container mx-auto">
         

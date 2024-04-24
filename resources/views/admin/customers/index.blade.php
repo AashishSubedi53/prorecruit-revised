@@ -3,6 +3,7 @@
         Customers
     </x-slot>
 
+    @if(session('success')) 
     <div class="mb-4 inline-flex overflow-hidden w-full bg-white rounded-lg shadow-md">
         <div class="flex justify-center items-center w-12 bg-blue-500">
             <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
@@ -13,10 +14,11 @@
         <div class="px-4 py-2 -mx-3">
             <div class="mx-3">
                 <span class="font-semibold text-blue-500">Info</span>
-                <p class="text-sm font-semibold text-gray-600">user added successfully !</p>
+                <p class="text-sm font-semibold text-gray-600">{{session('success')}}</p>
             </div>
         </div>
     </div>
+    @endif
 
    <!-- table --> 
 <div class="mt-5 mb-5">
@@ -117,6 +119,8 @@
         </tbody>
     </table>
 </div>
+
+{{$customers->links()}}
 
 
 </x-app-layout>

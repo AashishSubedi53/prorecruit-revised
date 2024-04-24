@@ -12,7 +12,7 @@
     </div>
 
     @if($message = Session::get('success'))
-    <div class="fixed bottom-0 pb-4 w-full pointer-events-none">
+    <div class="fixed top-0 pt-4 w-full pointer-events-none" id="success-message">
         <div class="container mx-auto flex justify-end">
             <div class="mb-4 pointer-events-auto p-5 inline-flex overflow-hidden w-full max-w-lg bg-white rounded-lg shadow-md">
                 <div class="flex justify-center items-center w-12 bg-blue-500">
@@ -31,6 +31,12 @@
             </div>
         </div>
     </div>
+    <script>
+        // Hide success message after 5 seconds (5000 milliseconds)
+        setTimeout(function() {
+            document.getElementById('success-message').style.display = 'none';
+        }, 5000);
+    </script>
     @endif
 
     <div class="relative overflow-x-auto container mx-auto mb-20">

@@ -43,7 +43,10 @@ class GoogleAuthController extends Controller
                 if(session('user_type') === 'customer'){
                     Customer::create([
                         'user_id' => $new_user->id,
+                        'first_name' => $google_user->getName(),
+                        'last_name' => $google_user->getName(),
                         'profile_image'
+                        
                     ]);
                 }else{
                     Professional::create([
@@ -56,11 +59,12 @@ class GoogleAuthController extends Controller
                 //     return redirect()->route('home');
                 // }
                 // return redirect(RouteServiceProvider::redirectTo());
-                return redirect()->route('home');
+                return redirect()->url('/');
                 
             } else{
                 Auth::login($user); 
-                return redirect(RouteServiceProvider::redirectTo());
+                // return redirect(RouteServiceProvider::redirectTo());
+                return redirect()->route('home');
 
             }
             

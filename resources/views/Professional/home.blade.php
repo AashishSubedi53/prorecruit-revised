@@ -7,6 +7,9 @@
 @endsection
 
 @section('content')
+@push('script')
+  @vite('resources/js/app.js')
+@endpush
 
 <!-- <section class="m-10 flex flex-col">
   <div id="top" class="flex flex-row space-x-5 p-10">
@@ -62,14 +65,14 @@
 </section> -->
 
 <section class="m-10 grid grid-cols-3 gap-5 w-1/2 mx-auto items-center">
-  <div class="shadow-lg border border-gray-300 bg-slate-200 rounded-lg hover:shadow-xl active:bg-gray-300 py-5">
+  {{-- <div class="shadow-lg border border-gray-300 bg-slate-200 rounded-lg hover:shadow-xl active:bg-gray-300 py-5">
     <a href="{{route('professional.my-bookings.index')}}" class="flex flex-col items-center">
       <div class="w-20 h-24">
         <img src="{{asset('storage/icons/booking.png')}}" alt="">
       </div>
       <p class="font-semibold text-[16px]">My Bookings</p>
     </a>
-  </div>
+  </div> --}}
 
   <div class="shadow-lg border border-gray-300 bg-slate-200 rounded-lg hover:shadow-xl active:bg-gray-300 py-3">
     <a href="{{route('professional.my-orders.index')}}" class="flex flex-col items-center">

@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Models\SiteSetting;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -17,8 +18,18 @@ Route::middleware('guest')->group(function () {
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-                ->name('login');
+    // Route::get('login', [AuthenticatedSessionController::class, 'create'])
+    //             ->name('login');
+    Route::get('login', function () {
+        // Retrieve the SiteSetting model instance
+        $siteSetting = SiteSetting::first();
+    
+        // Get the homepage banner image path
+        $imagePath = $siteSetting->homepage_banner;
+    
+        // Return the view with the image path
+        return view('auth.login', ['imagePath' => $imagePath]);
+    })->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 

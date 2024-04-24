@@ -142,4 +142,5 @@
         </tbody>
     </table>
 </div>
+{{$professionals->links()}}
 </x-app-layout>

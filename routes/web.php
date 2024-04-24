@@ -32,6 +32,7 @@ use App\Livewire\Professional\Services\CreateServices;
 use App\Livewire\Professional\Services\EditServices;
 use App\Livewire\Professional\Services\Index;
 use App\Models\Service;
+use App\Models\SiteSetting;
 use App\Models\Testimonial;
 use Illuminate\Support\Facades\Route;
 
@@ -93,11 +94,25 @@ Route::get('/admin/dashboard/stats', [DashboardController::class, 'getStats']);
 //     return view('login');
 // })->name('logintest');
 
+// Route::get('login', function () {
+//     // Retrieve the SiteSetting model instance
+//     $siteSetting = SiteSetting::first();
+
+//     // Get the homepage banner image path
+//     $imagePath = $siteSetting->homepage_banner;
+
+//     // Return the view with the image path
+//     return view('auth.login', ['imagePath' => $imagePath]);
+// })->name('login');
+
 Route::get('register-user', function(){
+
+//     // Get the homepage banner image path
     return view('registeruser');
 })->name('registeruser');
 
 Route::get('register-pro', function(){
+//     // Get the homepage banner image path
     return view('registerpro');
 })->name('registerpro');
 
@@ -165,4 +180,9 @@ Route::group(['prefix' => 'professional', 'as' => 'professional.'], function(){
 // Route::get('/checkout', [Checkout::class, 'StripeCheckout'])->name('checkout');
 // Route::post('/session', [Checkout::class, 'session'])->name('session');
 Route::get('/success', [Checkout::class, 'success'])->name('success');
+
+
+// khalti
+Route::post('/khalti/verification', [Checkout::class,'KhaltiVerification'])->name('khalti.payment');
+Route::get('/khalti/callback', [Checkout::class,'KhaltiCallback'])->name('khalti.callback');
 

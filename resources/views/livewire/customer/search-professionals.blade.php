@@ -68,7 +68,9 @@
                   <img src="{{asset('storage/icons/clock.png')}}" alt="" class="h-5 w-5"><p class="text-gray-600">{{$proService->price}}</p>
                 </div>
                 <p class="text-gray-600">
-                    {{$proService->description}}
+                    {{-- {{$proService->description}} --}}
+                    {{substr($proService->description, 0, 100)}}...
+
                 </p>
             </div>
             <div class="flex space-x-1">

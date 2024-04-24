@@ -85,7 +85,7 @@ class ServiceCategoryController extends Controller
             $serviceCategory->update(['image' => $imagePath]);
         }
 
-        return redirect()->route('admin.serviceCategories.index')->with('success', 'Service Category added successfully!');
+        return redirect()->back()->with('success', 'Service Category updated successfully!');
     }
 
     /**

@@ -38,7 +38,7 @@
 
     <div class="payment-modes">
     <h3 class="text-[20px] font-semibold mb-5">We accept</h3>
-      <img src="{{asset('storage/logo/esewa.png')}}" alt="esewa-logo" height="100px" width="100px">
+      <img class="bg-white h-[50px] w-[100px] object-cover" src="{{asset('storage/logo/stripe.png')}}" alt="stripe-logo">
       <br>
       <img src="{{asset('storage/logo/khalti.png')}}" alt="khalti-logo" height="100px" width="100px">
     </div>

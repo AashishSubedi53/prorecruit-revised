@@ -6,7 +6,7 @@
 @section('content')
 <section class="grid grid-cols-2 gap-5 mx-20 my-10">
   <div class="ml-40">
-    <img src="{{asset('build/assets/images/cleaning.png')}}" alt="image" height="400px" width="400px">
+    <img src="{{asset('storage/'. $imagePath)}}" alt="image" height="1000px" width="450px">
   </div>
 
   <div>

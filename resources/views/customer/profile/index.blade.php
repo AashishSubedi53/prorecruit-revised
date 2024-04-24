@@ -63,8 +63,6 @@ Profile Settings
     <h3 class="text-2xl font-semibold">Change Password</h3>
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
           @csrf
-          @method('put')
-
           <div>
               <label for="update_password_current_password" class="text-gray-500 font-semibold"> Current Password </label>
               <input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full border border-gray-400 rounded-md" autocomplete="current-password" />
@@ -93,7 +91,7 @@ Profile Settings
                       x-transition
                       x-init="setTimeout(() => show = false, 2000)"
                       class="text-sm text-gray-600"
-                  >{{ __('Saved.') }}</p>
+                  >{{ __('Password changed!') }}</p>
               @endif
           </div>
       </form>
