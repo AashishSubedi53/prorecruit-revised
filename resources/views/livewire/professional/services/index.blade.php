@@ -1,3 +1,6 @@
+@push('script')
+  @vite('resources/js/flowbite.js')
+@endpush
 <div>  
     {{-- @section('content') --}}
     <div class="bg-blue-700 pt-10 pb-5 text-white mb-10">

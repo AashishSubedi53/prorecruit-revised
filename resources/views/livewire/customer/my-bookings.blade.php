@@ -1,3 +1,6 @@
+@push('script')
+  @vite('resources/js/flowbite.js')
+@endpush
 <div>
   @if($message = Session::get('success'))
     <div class="fixed top-0 pt-4 w-full pointer-events-none" id="success-message">

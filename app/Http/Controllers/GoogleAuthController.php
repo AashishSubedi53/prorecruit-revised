@@ -34,7 +34,7 @@ class GoogleAuthController extends Controller
                     'username' => $google_user->getName(),
                     'email' => $google_user->getEmail(),
                     'google_id'=> $google_user->getId(), 
-                    'password' => Hash::make('password'), 
+                    // 'password' => Hash::make('password'), 
                     'user_type' => session('user_type'),
                         
                     
@@ -43,34 +43,36 @@ class GoogleAuthController extends Controller
                 if(session('user_type') === 'customer'){
                     Customer::create([
                         'user_id' => $new_user->id,
-                        'first_name' => $google_user->getName(),
-                        'last_name' => $google_user->getName(),
-                        'profile_image'
+                        'first_name' => $google_user->user['given_name'],
+                        'last_name' => $google_user->user['family_name'],
+                        'address' => 'Address',
+                        'phonenumber' => '98xxxxxxxx',
+                        'profile_image' => '/profile-images/default-profile.png'
                         
                     ]);
+
+                   
                 }else{
-                    Professional::create([
-                        'profile_image'
-                    ]);
+                    
                     
                 }
                 Auth::login($new_user);
-                // if(session('user_type')==='customer'){
-                //     return redirect()->route('home');
-                // }
-                // return redirect(RouteServiceProvider::redirectTo());
-                return redirect()->url('/');
+                if(session('user_type')==='customer'){
+                    return redirect()->route('home');
+                }
+                return redirect(RouteServiceProvider::redirectTo());
+                // return redirect()->url('/');
                 
             } else{
                 Auth::login($user); 
-                // return redirect(RouteServiceProvider::redirectTo());
-                return redirect()->route('home');
+                return redirect(RouteServiceProvider::redirectTo());
+                // return redirect()->route('home');
 
             }
             
         }
         catch(Exception $ex){
-            // return redirect("/");
+            return redirect("/");
         }
 
     }

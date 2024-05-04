@@ -335,7 +335,8 @@ public function KhaltiCallback(Request $request){
             ],
             'mode' => 'payment',
             // 'success_url' => route('customer.my-bookings'),
-            'success_url' => redirect()->route('customer.my-bookings')->with('success', 'Payment Successful !!'),
+            'success_url' => route('customer.my-bookings'),
+            session()->flash('success', 'Payment successfull !!'),
             'cancel_url' =>route('customer.checkout'),
             ]);
 

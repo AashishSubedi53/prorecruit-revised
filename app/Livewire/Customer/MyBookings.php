@@ -23,6 +23,9 @@ class MyBookings extends Component
     public function mount(){
         // $this->orders = Order::where('customer_id',Auth::user()->customer->id)->get();
         $this->orders = Order::with('professionalService')->where('customer_id', Auth::user()->customer->id)->get();
+        // PaginationUrl
+        // Paginator
+        
 
 
 
@@ -50,10 +53,13 @@ class MyBookings extends Component
         return redirect('/customer/professional-details/' . $professional_id);
     }
 
+     
+
     public function render()
     {
         return view('livewire.customer.my-bookings')
         ->extends('layouts.users.app')
         ->section('content');
+        
     }
 }

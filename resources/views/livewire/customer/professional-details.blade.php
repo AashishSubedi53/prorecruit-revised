@@ -1,3 +1,6 @@
+@push('script')
+  @vite('resources/js/flowbite.js')
+@endpush
 <div>
     <section class="w-4/5 py-8 px-5 mx-auto">
         <div class="flex justify-between mb-10">

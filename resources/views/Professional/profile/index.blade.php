@@ -4,6 +4,9 @@ Profile Settings
 @endsection
 
 @section('content')
+@push('script')
+  @vite('resources/js/flowbite.js')
+@endpush
 
 <section class="flex space-x-10 p-10 justify-center">
   <div id="left" class="bg-gray-200 p-10 rounded-md w-1/3">
@@ -63,13 +66,14 @@ Profile Settings
     <h3 class="text-2xl font-semibold">Change Password</h3>
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
           @csrf
-          @method('put')
 
+          @if(auth()->user()->password)
           <div>
               <label for="update_password_current_password" class="text-gray-500 font-semibold"> Current Password </label>
               <input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full border border-gray-400 rounded-md" autocomplete="current-password" />
               <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
           </div>
+          @endif
 
           <div>
               <label for="update_password_password" class="text-gray-500 font-semibold"> New Password </label>

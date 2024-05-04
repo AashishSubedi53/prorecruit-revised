@@ -4,6 +4,9 @@
 @endsection
 
 @section('content')
+@push('script')
+  @vite('resources/js/flowbite.js')
+@endpush
 
 <section id="form" class="grid grid-cols-2 gap-10 my-5 mx-10">
   <div class="left">

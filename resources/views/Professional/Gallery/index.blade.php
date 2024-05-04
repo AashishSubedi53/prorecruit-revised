@@ -4,6 +4,9 @@
 @endsection
 
 @section('content')
+@push('script')
+  @vite('resources/js/flowbite.js')
+@endpush
 
 @if($message = Session::get('success'))
 <div class="p-5 ease-in duration-300" id="success-message">

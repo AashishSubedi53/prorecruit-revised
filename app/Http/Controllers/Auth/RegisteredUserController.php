@@ -80,7 +80,11 @@ class RegisteredUserController extends Controller
                 'user_id' => $user->id,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'address' => $request->address,
+                'address_line_1' => $request->address_line_1,
+                'address_line_2' => $request->address_line_2,
+                'province' => $request->province,
+                'city' => $request->city,
+                'postal_code' => $request->postal_code,
                 'phonenumber' => $request->phonenumber,
                 'profile_image'
             ]);

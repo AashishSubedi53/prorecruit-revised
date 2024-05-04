@@ -5,7 +5,7 @@
 
 @section('content')
 @push('script')
-  @vite('resources/js/app.js')
+  @vite('resources/js/flowbite.js')
 @endpush
 
 

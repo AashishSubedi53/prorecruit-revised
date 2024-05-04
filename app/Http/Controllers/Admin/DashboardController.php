@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Order;
 use App\Models\Professional;
-use App\Models\Professional\Booking;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,16 +25,16 @@ class DashboardController extends Controller
         $totalUsers = User::count();
         $totalCustomers = Customer::count();
         $totalProfessionals = Professional::count();
-        // $totalBookings = Booking::count();
-        // $todayBookings = Booking::whereDate('created_at', today())->count();
+        $totalBookings = Order::count();
+        $todayBookings = Order::whereDate('created_at', today())->count();
         $totalServices = Service::count();
 
         return response()->json([
             'totalUsers' => $totalUsers,
             'totalCustomers' => $totalCustomers,
             'totalProfessionals' => $totalProfessionals,
-            // 'totalBookings' => $totalBookings,
-            // 'todayBookings' => $todayBookings,
+            'totalBookings' => $totalBookings,
+            'todayBookings' => $todayBookings,
             'totalServices' => $totalServices,
         ]);
 }

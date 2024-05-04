@@ -36,9 +36,38 @@
         <x-input-error :messages="$errors->get('username')" class="mt-2" />
       </div>
       <div class="mb-5">
-        <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-        <input type="address" id="address" name="address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address" required>
-        <x-input-error :messages="$errors->get('address')" class="mt-2" />
+        <label for="address_line_1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address Line 1</label>
+        <input type="text" id="address_line_1" name="address_line_1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="address_line_1">
+        <x-input-error :messages="$errors->get('address_line_1')" class="mt-2" />
+      </div>
+      <div class="mb-5">
+        <label for="address_line_2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address Line 2</label>
+        <input type="text" id="address_line_2" name="address_line_2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="address_line_2">
+        <x-input-error :messages="$errors->get('address_line_2')" class="mt-2" />
+      </div>
+      <div class="mb-5">      
+        <label for="province" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Province</label>
+        <select id="province" name="province" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected disabled value="Service Category">Service Province</option>
+            <option value="Province 1">Province 1</option>            
+            <option value="Madhesh Pradesh">Madhesh Pradesh</option>            
+            <option value="Bagmati">Bagmati</option>            
+            <option value="Gandaki">Gandaki</option>            
+            <option value="Lumbini">Lumbini</option>            
+            <option value="Karnali">Karnali</option>            
+            <option value="Sudurpaschim">Sudurpaschim</option>            
+        </select>        
+        <x-input-error :messages="$errors->get('service_category')" class="mt-2" />
+      </div>
+      <div class="mb-5">
+        <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
+        <input type="text" id="city" name="city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="city">
+        <x-input-error :messages="$errors->get('city')" class="mt-2" />
+      </div>
+      <div class="mb-5">
+        <label for="postal_code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Postal_code</label>
+        <input type="text" id="postal_code" name="postal_code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="postal_code">
+        <x-input-error :messages="$errors->get('postal_code')" class="mt-2" />
       </div>
       <div class="mb-5">
         <label for="phonenumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>

@@ -58,9 +58,8 @@
 
 <div class="w-1/2 mx-auto p-8">
     
-<form method="POST" action="{{ route('password.update') }}">
+<form method="POST" action="{{ route('password.store') }}">
     @csrf
-
         <!-- Password Reset Token -->
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 

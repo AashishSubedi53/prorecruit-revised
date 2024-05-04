@@ -60,7 +60,7 @@
 
                 </div>
                 <div>
-                    <p class="font-bold text-[16px]">38</p>
+                    <p class="font-bold text-[16px]" x-text="stats.totalBookings"></p>
                     <p class="text-gray-500 font-semibold text-[12px]">Total Booking</p>
                 </div>                
             </div>
@@ -74,7 +74,7 @@
 
                 </div>
                 <div>
-                    <p class="font-bold text-[16px]"></p>
+                    <p class="font-bold text-[16px]" x-text="stats.todayBookings"></p>
                     <p class="text-gray-500 font-semibold text-[12px]">Today Booking</p>
                 </div>                
             </div>

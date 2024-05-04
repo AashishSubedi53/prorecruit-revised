@@ -8,7 +8,7 @@
 
 @section('content')
 @push('script')
-  @vite('resources/js/app.js')
+  @vite('resources/js/flowbite.js')
 @endpush
 
 <!-- <section class="m-10 flex flex-col">
