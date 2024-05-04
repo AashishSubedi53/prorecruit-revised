@@ -15,7 +15,11 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('Professional.profile.index');
+        if(Auth::user()){
+            return view('Professional.profile.index');
+        }else{
+            return redirect()->route('home');
+        }
     }
 
     /**

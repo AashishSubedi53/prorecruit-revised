@@ -15,7 +15,11 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('customer.profile.index');
+        if(Auth::user()){
+            return view('customer.profile.index');
+        }else{
+            return redirect()->route('home');
+        }
         
     }
 

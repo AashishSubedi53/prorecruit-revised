@@ -116,7 +116,7 @@ class ProfessionalDetails extends Component
     {
         return view('livewire..customer.professional-details',
         ['averageRating' => $this->averageRating])
-        ->extends('layouts.users.app')
+        ->extends('layouts.users.livewire-layout')
         ->section('content');
     }
 }

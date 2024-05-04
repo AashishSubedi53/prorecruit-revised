@@ -67,8 +67,12 @@ class Checkout extends Component
 
         // eager loading 
         $this->proService = ProfessionalService::with('service')->where('id', $this->proServiceId)->first();
+        $this->service_name = $this->proService->service->service_name;   
 
-        $this->service_name = $this->proService->service->service_name;        
+        if($this->service_name === null){
+            return 'Something went wrong! Please try again.';
+        }
+
         $this->service_price = $this->proService->price;     
         $this->service_price = $this->proService->price;
         $this->totalProcessingFee = $this->service_price * 0.05;

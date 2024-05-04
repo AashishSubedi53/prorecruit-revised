@@ -41,6 +41,8 @@
             <p class="flex flex-row items-center"><span class="mr-2"><img src="{{asset('storage/icons/calendar.png')}}" alt="" height="20px" width="20px"></span><span>{{$order->bookingDate}}</span> </p>
             <p class="flex flex-row items-center"><span class="mr-2"><img src="{{asset('storage/icons/ph_clock-bold.png')}}" alt="" height="20px" width="20px"></span>{{$order->bookingTime}}</p>
             <p><span class="font-semibold">Payment Method:</span> {{$order->payment->payment_method}}</p>
+            <p><span class="font-semibold">Booked on:</span> {{$order->payment->created_at}}</p>
+            
           </div>
         </div>
       

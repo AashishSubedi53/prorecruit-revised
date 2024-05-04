@@ -8,10 +8,15 @@ Profile Settings
   @vite('resources/js/flowbite.js')
 @endpush
 
+
+  
+
 <section class="flex space-x-10 p-10 justify-center mt-10 mb-10">
-  <div id="left" class="bg-slate-100 p-10 rounded-md w-1/3">
+
+  <div id="left" class="bg-slate-100 p-10 rounded-md w-1/3">      
+    
     <div class="w-20 h-20">
-      <img src="{{asset('storage/' . auth()->user()->customer->profile_image ?? 'build/assets/images/default-profile.png')}}" alt="" class="h-full w-full rounded-full">
+      <img src="{{asset('storage/' . auth()->user()->customer->profile_image ?? 'profile-images/default-profile.png')}}" alt="" class="h-full w-full rounded-full">
     </div>
 
     <div class="mt-5">
@@ -102,5 +107,6 @@ Profile Settings
       </form>
   </div>
 </section>
+
   
 @endsection

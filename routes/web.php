@@ -58,29 +58,11 @@ Route::get('/', function () {
 })->name('home');
 
 
-// customer profile
-// Route::get('/customer/my-profile', [CustomerProfileController::class, 'index'])->name('customer-profile');
-
-// Route::get('/customer/my-profile/edit/{id}',[CustomerProfileController::class, 'edit'])->name('customer-profile-edit');
-
-// Route::patch('/customer/my-profile/edit/{id}', [CustomerProfileController::class, 'update'])->name('customer-profile-update');
-
-// //professional profile
-// Route::get('/professional/my-profile', [ProfessionalProfileController::class, 'index'])->name('professional-profile');
-
-// Route::get('/professional/my-profile/edit/{id}',[ProfessionalProfileController::class, 'edit'])->name('professional-profile-edit');
-
-// Route::patch('/professional/my-profile/edit/{id}', [ProfessionalProfileController::class, 'update'])->name('professional-profile-update');
-
-
 Route::get('auth/google', [GoogleAuthController::class, 'googleLogin'])->name('google-auth');
 Route::get('auth/google/callback', [GoogleAuthController::class, 'callbackGoogle'])->name('google-callback');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard',[DashboardController::class, 'showMap']);
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('admin/dashboard', [DashboardController::class, 'showMap'])->middleware(['auth', 'verified'])->name('dashboard'); 
+Route::get('admin/dashboard', [DashboardController::class, 'showMap'])->middleware(['auth', 'verified', 'role:admin'])->name('dashboard'); 
 Route::get('/contact', function(){
     return view('contact');
 })->name('contact');
@@ -89,21 +71,6 @@ Route::post('/contact', [ContactController::class, 'sendContactForm'])->name('co
 
 Route::get('/admin/dashboard/stats', [DashboardController::class, 'getStats']);
 
-
-// Route::get('login', function(){
-//     return view('login');
-// })->name('logintest');
-
-// Route::get('login', function () {
-//     // Retrieve the SiteSetting model instance
-//     $siteSetting = SiteSetting::first();
-
-//     // Get the homepage banner image path
-//     $imagePath = $siteSetting->homepage_banner;
-
-//     // Return the view with the image path
-//     return view('auth.login', ['imagePath' => $imagePath]);
-// })->name('login');
 
 Route::get('register-user', function(){
 
@@ -118,7 +85,7 @@ Route::get('register-pro', function(){
 
 Route::view('about', 'about')->name('about');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('admin/users', [UserController::class, 'index'])
     ->name('users.index');
@@ -129,7 +96,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware'=>'role:admin'], function(){
 
     Route::resource('customers', CustomerController::class);
     Route::resource('professionals', ProfessionalController::class);
@@ -142,12 +109,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
 });
 
 // site Settings
-Route::get('admin/site-settings', [SiteSettingController::class, 'edit'])->middleware(['auth', 'verified'])->name('admin.settings.edit');
-Route::patch('admin/site-settings', [SiteSettingController::class, 'update'])->middleware(['auth', 'verified'])->name('admin.settings.update');
+Route::get('admin/site-settings', [SiteSettingController::class, 'edit'])->middleware(['auth', 'verified','role:admin'])->name('admin.settings.edit');
+Route::patch('admin/site-settings', [SiteSettingController::class, 'update'])->middleware(['auth', 'verified','role:admin'])->name('admin.settings.update');
 
 require __DIR__.'/auth.php';
 
-Route::group(['prefix' => 'customer', 'as' => 'customer.'], function(){
+Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware'=>'role:customer'], function(){
     Route::resource('my-profile', CustomerProfileController::class);
     // Route::resource('search-professional', CustomerHomeController::class);
     Route::get('search-professionals', SearchProfessionals::class)->name('search-professionals.index');
@@ -161,7 +128,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function(){
 });
 
 
-Route::group(['prefix' => 'professional', 'as' => 'professional.'], function(){
+Route::group(['prefix' => 'professional', 'as' => 'professional.', 'middleware'=>'role:professional'], function(){
     Route::resource('/', HomeController::class);
     Route::resource('my-profile', ProfessionalProfileController::class);
     Route::resource('my-orders', ProfessionalOrderController::class);
@@ -177,12 +144,10 @@ Route::group(['prefix' => 'professional', 'as' => 'professional.'], function(){
 
 
 // stripe
-// Route::get('/checkout', [Checkout::class, 'StripeCheckout'])->name('checkout');
-// Route::post('/session', [Checkout::class, 'session'])->name('session');
-Route::get('/success', [Checkout::class, 'success'])->name('success');
+Route::get('/success', [Checkout::class, 'success'])->name('success')->middleware('role:customer');
 
 
 // khalti
-Route::post('/khalti/verification', [Checkout::class,'KhaltiVerification'])->name('khalti.payment');
-Route::get('/khalti/callback', [Checkout::class,'KhaltiCallback'])->name('khalti.callback');
+Route::post('/khalti/verification', [Checkout::class,'KhaltiVerification'])->name('khalti.payment')->middleware('role:customer');
+Route::get('/khalti/callback', [Checkout::class,'KhaltiCallback'])->name('khalti.callback')->middleware('role:customer');
 
