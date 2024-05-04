@@ -55,7 +55,7 @@ Route::get('/', function () {
     // testimonials
     $testimonials = Testimonial::all();
     return view('welcome', compact(['homeServices', 'healthServices', 'webServices', 'testimonials']));
-})->name('home');
+})->name('home')->middleware('redirectUser');
 
 
 Route::get('auth/google', [GoogleAuthController::class, 'googleLogin'])->name('google-auth');
@@ -65,7 +65,7 @@ Route::get('auth/google/callback', [GoogleAuthController::class, 'callbackGoogle
 Route::get('admin/dashboard', [DashboardController::class, 'showMap'])->middleware(['auth', 'verified', 'role:admin'])->name('dashboard'); 
 Route::get('/contact', function(){
     return view('contact');
-})->name('contact');
+})->name('contact')->middleware('redirectUser');
 
 Route::post('/contact', [ContactController::class, 'sendContactForm'])->name('contact-submit');
 
@@ -83,7 +83,7 @@ Route::get('register-pro', function(){
     return view('registerpro');
 })->name('registerpro');
 
-Route::view('about', 'about')->name('about');
+Route::view('about', 'about')->name('about')->middleware('redirectUser');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
