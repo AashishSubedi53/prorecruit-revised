@@ -45,7 +45,7 @@
                         <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                     </svg>
                     </div>
-                    <input datepicker wire:model="bookingDate" id="bookingDate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                    <input wire:model="bookingDate" id="bookingDate" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date" min="{{\Carbon\Carbon::tomorrow()->toDateString()}}">
                 </div>
     
                 <div class="relative">
@@ -56,7 +56,7 @@
                         </svg>
                     </div>
                     {{-- <input type="time" id="time" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" min="09:00" max="18:00" value="00:00" required /> --}}
-                    <input type="time" wire:model="bookingTime" id="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  min="09:00" max="18:00" value="00:00" required />
+                    <input wire:model="bookingTime" id="time" type="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  min="09:00" max="18:00" value="00:00" required />
                 </div>
 
                 <div>
@@ -64,7 +64,7 @@
                   <select id="professional_service" wire:model="selectedService" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="Select a service" selected disabled>Select a service</option>
                     @foreach ($professional->service as $proService)
-                      <option value="{{$proService->service_id}}">{{$proService->service->service_name}}</option>
+                      <option value="{{$proService->id}}">{{$proService->service->service_name}}</option>
                     @endforeach
                     {{-- @foreach ($proServices as $proService)
                       <option value="{{$proService->id}}">{{$proService->service->service_name}}</option>
@@ -118,6 +118,7 @@
       @foreach ($professional->service as $service)
         
         <div class="mb-10">
+          <h1 class="font-semibold text-xl mb-2">'{{$service->service->service_name}} service' description</h1>
           <p>{{$service->description}}</p>
         </div>
         @endforeach
@@ -269,15 +270,6 @@
                 {{$review->comments}}
               </p>
             </div>
-      
-            {{-- <div class="bg-gray-200 p-2 rounded-md mb-10">
-              <h3 class="mb-3 font-semibold text-l text-gray-700">Reply</h3>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat officia dolore maxime
-                reiciendis facilis. Modi officia laudantium doloribus dignissimos unde fugit odio saepe
-                aliquid nesciunt, nemo eligendi esse obcaecati quia.
-              </p>
-            </div> --}}
           </div>
         </div>
         @endforeach

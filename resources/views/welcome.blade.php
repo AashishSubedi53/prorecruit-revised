@@ -6,23 +6,12 @@
   @vite('resources/js/flowbite.js')
 @endpush
 
+<div>
 @auth    
 {{-- Welcome,&nbsp;<span>{{auth()->user()->username}}</span> --}}
 
   @if(auth()->user()->user_type==='customer')
   <div class="bg-blue-700 p-5">
-    {{-- <form class="max-w-md mx-auto mb-5 mt-10" action="{{route('customer.search-professionals.index')}}">   
-        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-        <div class="relative">
-            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                </svg>
-            </div>
-            <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search professionals based on services..." required />
-            <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700">Search</button>
-        </div>
-    </form> --}}
     @livewire('customer.search-box')
   </div>
   @endif
@@ -31,27 +20,27 @@
 <div class="bg-slate-200">
   <div class="flex justify-center space-x-12 p-10 text-center">
     <div>
-      <a href=""><img src="{{asset('storage/icons/home.png')}}" alt="home" height="50px" width="50px"></a>
+      <a href="{{route('customer.services', ['category' => '1'])}}"><img src="{{asset('storage/icons/home.png')}}" alt="home" height="50px" width="50px"></a>
       <p>Home</p>
     </div>
     <div>
-      <a href=""><img src="{{asset('storage/icons/Health.png')}}" alt="health" height="50px" width="50px"></a>
+      <a href="{{route('customer.services', ['category' => '2'])}}"><img src="{{asset('storage/icons/Health.png')}}" alt="health" height="50px" width="50px"></a>
       <p>Health</p>
     </div>
     <div>
-      <a href=""><img src="{{asset('storage/icons/events.png')}}" alt="events" height="50px" width="50px"></a>
+      <a href="{{route('customer.services', ['category' => '5'])}}"><img src="{{asset('storage/icons/events.png')}}" alt="events" height="50px" width="50px"></a>
       <p>Events</p>
     </div>
     <div>
-      <a href=""><img src="{{asset('storage/icons/business.png')}}" alt="business" height="50px" width="50px"></a>
+      <a href="{{route('customer.services', ['category' => '4'])}}"><img src="{{asset('storage/icons/business.png')}}" alt="business" height="50px" width="50px"></a>
       <p>Business</p>
     </div>
     <div>
-      <a href=""><img src="{{asset('storage/icons/design&web.png')}}" alt="design&web" height="50px" width="50px"></a>
+      <a href="{{route('customer.services', ['category' => '3'])}}"><img src="{{asset('storage/icons/design&web.png')}}" alt="design&web" height="50px" width="50px"></a>
       Design&Web
     </div>
     <div>
-      <a href=""><img src="{{asset('storage/icons/more.png')}}" alt="more" height="50px" width="50px"></a>
+      <a href="{{route('customer.services', ['category' => '6'])}}"><img src="{{asset('storage/icons/more.png')}}" alt="more" height="50px" width="50px"></a>
       More
     </div>
   </div>
@@ -75,13 +64,13 @@
                 <div id="slider"
                     class="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                     x-bind:style="'transform: translateX(' + transform + 'px)'">
-                    @foreach ($homeServices as $homeService)
-                        <div x-data="{ title: '{{ $homeService->service_name }}' }" class="flex flex-shrink-0 relative w-full sm:w-auto">
-                            <img src="{{ asset('storage/' . $homeService->image) }}" alt="{{ $homeService->service_name }}" height="200px" width="200px" />
-                            <div class="bg-opacity-30 absolute w-full h-full p-6 flex flex-col justify-end">
-                                <h3 x-text="title" class="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900"></h3>
-                            </div>
-                        </div>
+                    @foreach ($homeServices as $homeService)                       
+                            <a href="{{route('customer.search-professionals.index', ['service' => $homeService->service_name])}}" x-data="{ title: '{{ $homeService->service_name }}' }" class="flex flex-shrink-0 relative w-full sm:w-auto">
+                                <img src="{{ asset('storage/' . $homeService->image) }}" alt="{{ $homeService->service_name }}" height="200px" width="200px" />
+                                <div class="bg-opacity-30 absolute w-full h-full p-6 flex flex-col justify-end">
+                                    <h3 x-text="title" class="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900"></h3>
+                                </div>
+                            </a>                      
                     @endforeach
                 </div>
             </div>
@@ -117,12 +106,12 @@
                     class="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                     x-bind:style="'transform: translateX(' + transform + 'px)'">
                     @foreach ($healthServices as $healthService)
-                        <div x-data="{ title: '{{ $healthService->service_name }}' }" class="flex flex-shrink-0 relative w-full sm:w-auto">
+                        <a href="{{route('customer.search-professionals.index', ['service' => $healthService->service_name])}}" x-data="{ title: '{{ $healthService->service_name }}' }" class="flex flex-shrink-0 relative w-full sm:w-auto">
                             <img src="{{ asset('storage/' . $healthService->image) }}" alt="{{ $healthService->service_name }}" height="200px" width="200px" />
                             <div class="bg-opacity-30 absolute w-full h-full p-6 flex flex-col justify-end">
                                 <h3 x-text="title" class="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900"></h3>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
             </div>
@@ -158,12 +147,12 @@
                     class="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                     x-bind:style="'transform: translateX(' + transform + 'px)'">
                     @foreach ($webServices as $webService)
-                        <div x-data="{ title: '{{ $webService->service_name }}' }" class="flex flex-shrink-0 relative w-full sm:w-auto">
+                        <a href="{{route('customer.search-professionals.index', ['service' => $webService->service_name])}}" x-data="{ title: '{{ $webService->service_name }}' }" class="flex flex-shrink-0 relative w-full sm:w-auto">
                             <img src="{{ asset('storage/' . $webService->image) }}" alt="{{ $webService->service_name }}" height="200px" width="200px" />
                             <div class="bg-opacity-30 absolute w-full h-full p-6 flex flex-col justify-end">
                                 <h3 x-text="title" class="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900"></h3>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
             </div>
@@ -227,4 +216,5 @@
         </button>
     </div>
 </div>  
+</div>
 @endsection

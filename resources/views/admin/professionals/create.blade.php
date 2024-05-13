@@ -40,7 +40,7 @@
             <option selected disabled value="Service Category">Service Province</option>
             <option value="Province 1">Province 1</option>            
             <option value="Madhesh Pradesh">Madhesh Pradesh</option>            
-            <option value="Bagmati">Bagmati</option>            
+            <option value="Bagmati Province">Bagmati</option>            
             <option value="Gandaki">Gandaki</option>            
             <option value="Lumbini">Lumbini</option>            
             <option value="Karnali">Karnali</option>            

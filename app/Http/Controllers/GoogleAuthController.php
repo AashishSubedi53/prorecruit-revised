@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-// error_reporting(E_ALL);
 
 use App\Models\Customer;
 use App\Models\Professional;

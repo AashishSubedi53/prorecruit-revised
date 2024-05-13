@@ -8,6 +8,7 @@ use App\Models\Professional\ProfessionalService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Route as FacadesRoute;
@@ -17,6 +18,8 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Stripe\Checkout\Session as CheckoutSession;
 use Stripe\Stripe;
+
+use function Laravel\Prompts\error;
 
 class Checkout extends Component
 {
@@ -51,8 +54,9 @@ class Checkout extends Component
         return $this->receivedBookingDetails = session('bookingDetails');
     }
 
-    public function mount()
-    {
+    public function __construct()
+    {        
+
         $this->sessionReceiption();
         $this->bookingDate = $this->receivedBookingDetails['bookingDate'];
         $this->bookingTime = $this->receivedBookingDetails['bookingTime'];
@@ -60,20 +64,15 @@ class Checkout extends Component
         $this->city = $this->receivedBookingDetails['city'];
         $this->pin_code = $this->receivedBookingDetails['pin_code'];
         $this->additionalDetails = $this->receivedBookingDetails['additionalDetails'];
-        // dd($this->bookingDate, $this->bookingTime, $this->address, $this->city, $this->pin_code, $this->additionalDetails);
-        // $this->proServiceId = $this->receivedBookingDetails['proServiceId'];
-        $this->proServiceId = session('proServiceId');
-        // $this->proService = ProfessionalService::where('id',$this->proServiceId)->first();
+        $this->proServiceId = $this->receivedBookingDetails['proServiceId'];
+        
+        
 
         // eager loading 
         $this->proService = ProfessionalService::with('service')->where('id', $this->proServiceId)->first();
-        $this->service_name = $this->proService->service->service_name;   
+        $this->service_name = $this->proService->service->service_name;           
 
-        if($this->service_name === null){
-            return 'Something went wrong! Please try again.';
-        }
-
-        $this->service_price = $this->proService->price;     
+        // $this->service_price = $this->proService->price;     
         $this->service_price = $this->proService->price;
         $this->totalProcessingFee = $this->service_price * 0.05;
         $this->totalTax = $this->service_price * 0.08;
@@ -86,113 +85,51 @@ class Checkout extends Component
         $this->professionalService_id = $this->proService->id;
         $this->professional_id = $this->proService->professional_id;
 
-
-
-        // dd($this->proService);
-        // dd(FacadesRoute::currentRouteName());
-
     }
 
     
 
-
+    public function bookingConfirm(Request $request){
+        $total_charge = round($this->totalCharge);
+        $two0 = '00';
+        $total = $total_charge.$two0;
+        $payment = Payment::create([
+            'payment_status' => 'not paid',
+            'payment_method' => 'Khalti Payment',
+            'payment_amount' => $total,
+            'refund_amount' => 0
     
-    // For Khalti Payment 
+        ]);
+    
+        $order = Order::create([
+            'customer_id' => $this->customer_id,
+            'professionalService_id' => $this->professionalService_id,
+            'professional_id' => $this->professional_id,
+            'payment_id' => $payment->id,
+            'bookingDate' => $this->bookingDate,
+            'bookingTime' => $this->bookingTime,
+            'bookingAddress' => $this->address,
+            'city' => $this->city,
+            'pin_code' => $this->pin_code,
+            'additionalDetails' => $this->additionalDetails,
+            'order_status' => 'Awaiting Completion'
+    
+        ]);
 
-    // public function KhaltiVerification(Request $request)
-    // {
-    //     // Retrieve dynamic amount from session
-    //     if (Session::has('coupoun')) {
-    //         $total_amount = Session::get('coupoun')['total_amount'];
-    //         // $discount_amount = Session::get('coupoun')['discount_amount'];
-    //     } else {
-    //         $total_amount = $this->totalCharge;  // total amount
-    //         $discount_amount = 0;
-    //     }
-
-    //     $total_amount_paisa = (int) ($total_amount * 100);
-
+        return $this->KhaltiVerification($order->id);
         
-    //     $url = "https://a.khalti.com/api/v2/epayment/initiate/";
-    //     session(['khaltiPayment' => $request->input()]);
-    //     $requestBackURL = str_replace(" ", "","http://127.0.0.1:8000/khalti/callback");
-    //     $curl = curl_init();
-    //     curl_setopt_array($curl, array(
-    //         CURLOPT_URL => $url,
-    //         CURLOPT_RETURNTRANSFER => true,
-    //         CURLOPT_ENCODING => '',
-    //         CURLOPT_MAXREDIRS => 10,
-    //         CURLOPT_TIMEOUT => 0,
-    //         CURLOPT_FOLLOWLOCATION => true,
-    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    //         CURLOPT_CUSTOMREQUEST => 'POST',
-    //         CURLOPT_POSTFIELDS => '{
-    //         "return_url": "'. $requestBackURL . '",
-    //         "website_url": "http://127.0.0.1:8000",
-    //         "amount": "$total_amount",
-    //         "purchase_order_id": "Order01",
-    //         "purchase_order_name": "test",
-    //         "customer_info": {
-    //             "name": "Pro Recruit",
-    //             "email": "prorecruit@gmail.com",
-    //             "phone": "987654321"
-    //         }
-    //     }',
-    //         CURLOPT_HTTPHEADER => array(
-    //             'Authorization: key a1e2e45362ba4ed8a04e56c1814ccb01',
-    //             'Content-Type: application/json',
-    //         ),
-    //     ));
+    }
 
-    //     $response = curl_exec($curl);
-
-    //     curl_close($curl);
-
-    //     $response_data = json_decode($response, true);
-    //     dd($response_data['payment_url']);
-
-    //     if ($response_data && isset($response_data['payment_url'])) {
-    //         return Redirect::to($response_data['payment_url']);
-    //     } else {
-    //         return "Error initiating payment.";
-    //     }
-    // }
-
-
-
-// public function KhaltiCallback(Request $request){
-//     // dd($request->input('status'));
-//         // $user = User::where('role', 'admin')->get();
-
-//         if($request->input('status') == 'Completed'){
-
-//             $request->merge(session('khaltiPayment'));
-//             $request->merge(["payment_method"=>"Khalti"]);
-//             $request->merge(["payment_type" => "Khalti Online"]);
-//             $this->OrderSuccess($request);
-            
-//             // $notification = array(
-//             //     'message' => "Your Order Has Been Placed Successfully.",
-//             //     'alert-type' => 'success'
-//             // );
-
-            
-//             Session::forget('khaltiPayment');
-//             // Notification::send($user, new OrderComplete($request->name));
-
-            
-//             return redirect()->route('customer.my-bookings');
-
-// }
-// }
-
-public function KhaltiVerification(Request $request)
-    {
-        
+ 
+public function KhaltiVerification($order_id)
+    {     
+       
         
         $url = "https://a.khalti.com/api/v2/epayment/initiate/";
-        session(['khaltiPayment' => $request->input()]);
-        $requestBackURL = str_replace(" ", "","http://127.0.0.1:8000/khalti/callback");
+        
+        
+        setcookie('bookingDetails', json_encode(session('bookingDetails')));
+        $requestBackURL = str_replace(" ", "","http://127.0.0.1:8000/khalti/callback/$order_id");
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,
@@ -222,6 +159,7 @@ public function KhaltiVerification(Request $request)
         ));
 
         $response = curl_exec($curl);
+        
 
         curl_close($curl);
 
@@ -257,57 +195,7 @@ public function KhaltiVerification(Request $request)
 //         }
 //     }
 
-public function KhaltiCallback(Request $request){
-    // if($request->input('status') == 'Completed'){
-
-    //                 $request->merge(session('khaltiPayment'));
-    //                 $request->merge(["payment_method"=>"Khalti"]);
-    //                 $request->merge(["payment_type" => "Khalti Online"]);
-    //                 $this->OrderSuccess($request);
-                    
-    //                 // $notification = array(
-    //                 //     'message' => "Your Order Has Been Placed Successfully.",
-    //                 //     'alert-type' => 'success'
-    //                 // );
-        
-                   
-    //                 Session::forget('khaltiPayment');
-    //                 // Notification::send($user, new OrderComplete($request->name));
-             
-    //             }
-    $service_name = $this->service_name;
-        $total_charge = round($this->totalCharge);
-        $two0 = '00';
-        $total = $total_charge.$two0;
-
-
-        // order data
-
-    $payment = Payment::create([
-        'payment_status' => 'paid',
-        'payment_method' => 'Khalti Payment',
-        'payment_amount' => $total,
-        'refund_amount' => 0
-
-    ]);
-
-    $order = Order::create([
-        'customer_id' => $this->customer_id,
-        'professionalService_id' => $this->professionalService_id,
-        'professional_id' => $this->professional_id,
-        'payment_id' => $payment->id,
-        'bookingDate' => $this->bookingDate,
-        'bookingTime' => $this->bookingTime,
-        'bookingAddress' => $this->address,
-        'city' => $this->city,
-        'pin_code' => $this->pin_code,
-        'additionalDetails' => $this->additionalDetails,
-        'order_status' => 'Awaiting Completion'
-
-    ]);
-                return redirect()->route('customer.my-bookings');
-
-}
+   
 
 
 

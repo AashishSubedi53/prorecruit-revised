@@ -39,7 +39,6 @@ class ProfessionalDetails extends Component
         $this->images = Gallery::where('professional_id', $professional->id)->get();
         $this->proServices = ProfessionalService::where('professional_id', $professional->id)->get();
         $this->reviews = RatingAndReview::where('professional_id', $professional->id)->get();
-        // dd($professional->service);
         $this->averageRating = $this->calculateAverageRating();
         $this->totalRatings = $this->professional->ratingAndReview->count();
     }
@@ -52,10 +51,8 @@ class ProfessionalDetails extends Component
             "city" => $this->city,
             "pin_code" => $this->pin_code,
             "additionalDetails" => $this->additionalDetails,
-            // "proServiceId" => $this->proServiceId
+            "proServiceId" => $this->selectedService,
         ];
-
-        session(['proServiceId' => $this->selectedService]);
 
         $this->sessionStorage();
         return redirect()->route('customer.checkout');
@@ -69,14 +66,6 @@ class ProfessionalDetails extends Component
     protected $rules = [
         'comments' => ['required', 'min:10', 'max:500']
     ];
-
-    // protected function calculateAverageRating()
-    // {
-    //     // dd($this->professional);
-    //     $totalRatings = $this->professional->ratingAndReview->count();
-    //     $totalStars = $this->professional->ratingAndReview->sum('stars');
-    //     $this->averageRating = $totalRatings > 0 ? $totalStars / $totalRatings : 0;
-    // }
 
     public function calculateAverageRating()
     {
@@ -95,11 +84,9 @@ class ProfessionalDetails extends Component
     public function rate($value)
     {
         $this->rating = $value;
-        // dd($this->rating);
     }
 
     public function saveRatings(){
-        // dd($this->all());
         RatingAndReview::create([
             'stars' => $this->rating,
             'comments' => $this->comments,

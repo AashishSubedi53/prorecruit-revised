@@ -8,6 +8,7 @@ use App\Http\Controllers\Professional\HomeController;
 use App\Http\Controllers\Admin\ProfessionalController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SiteSettingController;
@@ -17,7 +18,9 @@ use App\Http\Controllers\Customer\HomeController as CustomerHomeController;
 use App\Http\Controllers\Customer\ProfessionalDetailsController;
 use App\Http\Controllers\Customer\ProfessionalSearchController;
 use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
+use App\Http\Controllers\Customer\serviceController as CustomerServiceController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\KhaltiConfirmController;
 use App\Http\Controllers\Professional\BookingController;
 use App\Http\Controllers\Professional\GalleryController;
 use App\Http\Controllers\Professional\OrderController as ProfessionalOrderController;
@@ -27,6 +30,7 @@ use App\Livewire\Checkout;
 use App\Livewire\Customer\MyBookings;
 use App\Livewire\Customer\ProfessionalDetails;
 use App\Livewire\Customer\SearchProfessionals;
+use App\Livewire\KhaltiControllerCheck;
 use App\Livewire\Professional\Services;
 use App\Livewire\Professional\Services\CreateServices;
 use App\Livewire\Professional\Services\EditServices;
@@ -107,6 +111,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware'=>'role:admin']
     Route::resource('reports', GenerateReportController::class);
     Route::resource('bookings', OrderController::class);
 });
+Route::get('/generate-report', [ReportController::class, 'generateReport'])->name('generate.bookings.report');
+
 
 // site Settings
 Route::get('admin/site-settings', [SiteSettingController::class, 'edit'])->middleware(['auth', 'verified','role:admin'])->name('admin.settings.edit');
@@ -123,6 +129,8 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware'=>'role:c
 
     Route::get('/checkout', Checkout::class)->name('checkout');
     Route::get('/my-bookings', MyBookings::class)->name('my-bookings');
+    Route::get('/services/{category}', [CustomerServiceController::class, 'index'])->name('services');
+
     
 
 });
@@ -148,6 +156,6 @@ Route::get('/success', [Checkout::class, 'success'])->name('success')->middlewar
 
 
 // khalti
-Route::post('/khalti/verification', [Checkout::class,'KhaltiVerification'])->name('khalti.payment')->middleware('role:customer');
-Route::get('/khalti/callback', [Checkout::class,'KhaltiCallback'])->name('khalti.callback')->middleware('role:customer');
+Route::post('/khalti/verification', [Checkout::class,'bookingConfirm'])->name('khalti.payment');
+Route::get('/khalti/callback/{order_id}', [KhaltiControllerCheck::class,'KhaltiCallback'])->name('khalti.callback');
 

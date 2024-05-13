@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Customer;
 
+use Illuminate\Http\Request;
 use Livewire\Component;
 
 class SearchBox extends Component

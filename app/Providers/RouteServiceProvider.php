@@ -18,7 +18,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-// public const HOME = '/admin/dashboard';
+
+    //  for manual route: public const HOME = '/admin/dashboard';
     public static function redirectTo()
     {
         if (Auth::user()->user_type == 'admin') {

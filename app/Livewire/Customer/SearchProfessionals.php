@@ -5,7 +5,10 @@ namespace App\Livewire\Customer;
 use App\Models\Professional;
 use App\Models\Professional\ProfessionalService;
 use App\Models\Service;
+use Illuminate\Http\Request;
 use Livewire\Component;
+
+use function PHPUnit\Framework\isEmpty;
 
 class SearchProfessionals extends Component
 {
@@ -16,7 +19,7 @@ class SearchProfessionals extends Component
     public $selectedLocation;
     public $enteredService;
 
-    public $proServiceId;    
+    public $proServiceId;   
 
 
     // modal properties
@@ -30,11 +33,10 @@ class SearchProfessionals extends Component
 
 
 
-    public function mount(){
-        // $this->professionalServices = ProfessionalService::all();
+    public function mount(Request $request){
         $this->professionalServices = ProfessionalService::with('professional.user', 'professional.address')->get();
         $this->services = Service::all();
-        $this->enteredService = session('enteredService');
+        $this->enteredService = session('enteredService') ?? $request->service;
         $this->checkSelectedServices();
 
         if ($this->enteredService) {
@@ -50,10 +52,9 @@ class SearchProfessionals extends Component
             "city" => $this->city,
             "pin_code" => $this->pin_code,
             "additionalDetails" => $this->additionalDetails,
-            // "proServiceId" => $this->proServiceId
+            "proServiceId" => $this->proServiceId
         ];
 
-        session(['proServiceId' => $this->proServiceId]);
 
         $this->sessionStorage();
         return redirect()->route('customer.checkout');

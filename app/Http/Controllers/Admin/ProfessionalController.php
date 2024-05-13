@@ -74,14 +74,19 @@ class ProfessionalController extends Controller
         ]);
 
         $sanitized['professional_id'] = $professional->id;
-        ProfessionalAddress::create([
-            'professional_id' => $sanitized['professional_id'],
-            'address_line_1' => $sanitized['address_line_1'],
-            'address_line_2' => $sanitized['address_line_2'],
-            'province' => $sanitized['province'],
-            'city' => $sanitized['city'],
-            'postal_code' =>  $sanitized['postal_code']
-        ]);
+        
+        try {
+            ProfessionalAddress::create([
+                'professional_id' => $sanitized['professional_id'],
+                'address_line_1' => $sanitized['address_line_1'],
+                'address_line_2' => $sanitized['address_line_2'],
+                'province' => $sanitized['province'],
+                'city' => $sanitized['city'],
+                'postal_code' =>  $sanitized['postal_code']
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('success', 'An error occurred while saving the professional address.');
+        }
 
         return redirect()->route('admin.professionals.index')->with('success', 'A Professional is added !');
     }

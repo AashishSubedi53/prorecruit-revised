@@ -16,12 +16,13 @@ class RedirectAuthenticatedUsers
     public function handle(Request $request, Closure $next)
     {
         if (auth()->check()) {
-            $role = auth()->user()->role;
+            $role = auth()->user()->user_type;
 
             // Redirect the user based on their role
+           if($role != 'customer'){
             switch ($role) {
                 case 'admin':
-                    return redirect()->route('admin.dashboard');
+                    return redirect()->route('dashboard');
                     break;
                 case 'professional':
                     return redirect()->route('professional.index');
@@ -30,6 +31,7 @@ class RedirectAuthenticatedUsers
                     return redirect()->route('login');
                     break;
             }
+           }
         }
 
         return $next($request);
