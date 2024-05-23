@@ -65,7 +65,7 @@ Profile Settings
 
         <div>
           <label for="address" class="text-gray-500 font-semibold">Address</label>
-          <input class="mt-1 block w-full border border-gray-400 rounded-md" type="text" name="address" value="{{auth()->user()->professional->address}}">
+          <input class="mt-1 block w-full border border-gray-400 rounded-md" type="text" name="address" value="{{auth()->user()->professional->address->address_line_1}}">
         </div>
 
         <div>

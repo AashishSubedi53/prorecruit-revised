@@ -2,7 +2,7 @@
 @import "editable.css";
 
 .page-link {
-    @apply block bg-white text-pg-secondary-800 border-r border-gray-200 outline-none py-2 w-12 text-sm text-center
+    @apply block !text-black border-r border-gray-200 outline-none py-2 w-12 text-sm text-center
 }
 
 .page-link:last-child {
@@ -10,15 +10,15 @@
 }
 
 .page-link:hover {
-    @apply bg-pg-secondary-700 text-white border-pg-secondary-700
+    @apply !text-gray-500 border-pg-secondary-700
 }
 
 .page-item.active .page-link {
-    @apply bg-pg-secondary-700 text-white border-pg-secondary-700
+    @apply !text-gray-500 border-pg-secondary-700
 }
 
 .page-item.disabled .page-link {
-    @apply bg-white text-gray-300 border-gray-200
+    @apply !text-gray-500 border-gray-200
 }
 
 .pg-btn-white {

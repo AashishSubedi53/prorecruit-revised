@@ -60,7 +60,6 @@ class CreateServices extends Component
         $this->reset();
         return redirect()->route('professional.my-services.index')->with('success', 'Service added successfully!!');
 
-        // session()->flash('success', 'Services added successfully!!');        
     }
 
     public function render()

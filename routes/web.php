@@ -23,6 +23,7 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\KhaltiConfirmController;
 use App\Http\Controllers\Professional\BookingController;
 use App\Http\Controllers\Professional\GalleryController;
+use App\Http\Controllers\Professional\Message;
 use App\Http\Controllers\Professional\OrderController as ProfessionalOrderController;
 use App\Http\Controllers\Professional\ProfessionalServiceController;
 use App\Http\Controllers\Professional\ProfileController as ProfessionalProfileController;
@@ -136,6 +137,8 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware'=>'role:c
 });
 
 
+
+
 Route::group(['prefix' => 'professional', 'as' => 'professional.', 'middleware'=>'role:professional'], function(){
     Route::resource('/', HomeController::class);
     Route::resource('my-profile', ProfessionalProfileController::class);
@@ -143,12 +146,14 @@ Route::group(['prefix' => 'professional', 'as' => 'professional.', 'middleware'=
     // Route::resource('my-services', ProfessionalServiceController::class);
     Route::resource('my-bookings', BookingController::class);
     Route::resource('gallery', GalleryController::class); 
+    Route::get('my-messages', [Message::class, 'index'])->name('my-messages');
     
     //routes for my-services
     Route::get('/my-services', Index::class)->name('my-services.index');
     Route::get('my-services/create', CreateServices::class)->name('my-services.create');
     Route::get('my-services/edit/{proService}', EditServices::class)->name('my-services.edit');
 });
+
 
 
 // stripe

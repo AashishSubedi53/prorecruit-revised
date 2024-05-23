@@ -27,10 +27,8 @@ class Index extends Component
         if ($proService) {
             $proService->delete();
             $this->professionalServices = ProfessionalService::where('professional_id', $this->professionalId)->get();
-            // session()->flash('success', 'Service deleted successfully!');
             redirect()->route('professional.my-services.index')->with('success', 'Service deleted successfully!');
         } else {
-            // session()->flash('error', 'Service not found!');
             redirect()->route('professional.my-services.index')->with('success', 'Service not found!');
 
         }

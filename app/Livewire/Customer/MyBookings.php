@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Customer;
 
+use App\Models\Message;
 use App\Models\Order;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
@@ -10,10 +11,12 @@ use Livewire\Component;
 class MyBookings extends Component
 {
     public $orders = [];
+    public $customer_id;
     public $service_image;
     public $service_name;
     public $bookingDate;
     public $bookingTime;
+    public $message;
     public $payment_method;
     public $totalPayment;
     public $payment_status;
@@ -23,34 +26,34 @@ class MyBookings extends Component
     public function mount(){
         // $this->orders = Order::where('customer_id',Auth::user()->customer->id)->get();
         $this->orders = Order::with('professionalService')->where('customer_id', Auth::user()->customer->id)->get();
-        // PaginationUrl
-        // Paginator
         
-
-
-
-        foreach ($this->orders as $order) {
-            // Assuming Service model has a method to fetch image based on service id
-            // $service = Service::find($order->proService->service->id);
-            // $this->service_image[] = $service->getImage(); // Assuming getImage() method exists
-
-            // Assigning other properties
-            // $this->service_name[] = $order->proService->service->name;
-            // $this->bookingDate[] = $order->bookingDate;
-            // $this->bookingTime[] = $order->bookingTime;
-            // $this->payment_method[] = $order->payment_method;
-            // $this->totalPayment[] = $order->totalPayment;
-            // $this->payment_status[] = $order->payment_status;
-            // $this->order_status[] = $order->order_status;
-
-            // dd($order->proService);
         }
-        
-        // dd($this->orders);
-    }
 
     public function professionalProfile($professional_id){
         return redirect('/customer/professional-details/' . $professional_id);
+    }
+
+    public function sendMessage(){
+        $message = Message::create([
+            'sender_id' => Auth::user()->customer->id,
+            'receiver_id' => $this->professional_id,
+            'message' => $this->message
+        ]);
+
+        session()->flash('success', 'Message sent successfully!');
+
+
+        return redirect()->route('customer.my-bookings');        
+        
+    }
+
+    public function cancelBooking($orderId){
+        $order = Order::find($orderId);
+        if ($order) {
+            $order->delete();
+            session()->flash('success', 'Booking canceled !');
+            return redirect()->route('customer.my-bookings');
+        }
     }
 
      

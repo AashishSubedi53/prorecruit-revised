@@ -28,11 +28,11 @@
       <p>Health</p>
     </div>
     <div>
-      <a href="{{route('customer.services', ['category' => '5'])}}"><img src="{{asset('storage/icons/events.png')}}" alt="events" height="50px" width="50px"></a>
+      <a href="{{route('customer.services', ['category' => '7'])}}"><img src="{{asset('storage/icons/events.png')}}" alt="events" height="50px" width="50px"></a>
       <p>Events</p>
     </div>
     <div>
-      <a href="{{route('customer.services', ['category' => '4'])}}"><img src="{{asset('storage/icons/business.png')}}" alt="business" height="50px" width="50px"></a>
+      <a href="{{route('customer.services', ['category' => '6'])}}"><img src="{{asset('storage/icons/business.png')}}" alt="business" height="50px" width="50px"></a>
       <p>Business</p>
     </div>
     <div>
@@ -40,7 +40,7 @@
       Design&Web
     </div>
     <div>
-      <a href="{{route('customer.services', ['category' => '6'])}}"><img src="{{asset('storage/icons/more.png')}}" alt="more" height="50px" width="50px"></a>
+      <a href="#"><img src="{{asset('storage/icons/more.png')}}" alt="more" height="50px" width="50px"></a>
       More
     </div>
   </div>

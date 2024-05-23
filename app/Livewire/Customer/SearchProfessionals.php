@@ -68,8 +68,7 @@ class SearchProfessionals extends Component
 
     public function checkSelectedServices()
     {
-        // Assuming $this->enteredService contains the service name
-        // Fetch the corresponding service_id from the database
+        
         $service = Service::where('service_name', $this->enteredService)->first();
 
         // If the service is found, set it as a selected service

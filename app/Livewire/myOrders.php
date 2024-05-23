@@ -74,7 +74,9 @@ final class myOrders extends PowerGridComponent
     {
         return [
             Column::make('Id', 'id'),
-            Column::make('Customer id', 'customer_id'),
+            Column::make('Customer id', 'customer_id')
+            ->sortable()
+            ->searchable(),
             Column::make('ProfessionalService id', 'professionalService_id'),
             Column::make('Professional id', 'professional_id'),
             Column::make('Payment id', 'payment_id'),
@@ -112,14 +114,13 @@ final class myOrders extends PowerGridComponent
             Column::make('Updated at', 'updated_at_formatted', 'updated_at')
                 ->sortable(),
 
-
-            // Column::action('Action')
         ];
     }
 
     public function filters(): array
     {
         return [
+            Filter::inputText('customer_id')->operators(['contains']),
             Filter::inputText('bookingDate')->operators(['contains']),
             Filter::inputText('bookingTime')->operators(['contains']),
             Filter::inputText('bookingAddress')->operators(['contains']),
@@ -131,32 +132,5 @@ final class myOrders extends PowerGridComponent
         ];
     }
 
-    // #[\Livewire\Attributes\On('edit')]
-    // public function edit($rowId): void
-    // {
-    //     $this->js('alert('.$rowId.')');
-    // }
-
-    // public function actions(\App\Models\Order $row): array
-    // {
-    //     return [
-    //         Button::add('edit')
-    //             ->slot('Edit: '.$row->id)
-    //             ->id()
-    //             ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-    //             ->dispatch('edit', ['rowId' => $row->id])
-    //     ];
-    // }
-
-    /*
-    public function actionRules($row): array
-    {
-       return [
-            // Hide button edit for ID 1
-            Rule::button('edit')
-                ->when(fn($row) => $row->id === 1)
-                ->hide(),
-        ];
-    }
-    */
+    
 }

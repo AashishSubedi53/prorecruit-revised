@@ -29,10 +29,16 @@
         }, 5000);
     </script>
     @endif
+
+    @if($orders->isEmpty())
+    <div class="mt-10 mb-24 p-24">
+      <p class="text-center font-semibold text-xl">There are no bookings made currently !</p>
+    </div>
+    @else
       @foreach ($orders as $order)
           
       <div class="flex flex-row justify-between w-3/4 mx-auto bg-gray-100 mt-10 mb-10 rounded-lg shadow-lg">
-        <div id="left" class="flex flex-row justify-around">
+        <div id="left" class="flex flex-row justify-around p-4">
           <div class="w-60 h-60 pt-2">
             <img src="{{asset('storage/' . $order->professionalService->service->image)}}" alt="animation image">
           </div>
@@ -52,16 +58,37 @@
               Leave Review
             </button>
       
-            <button class="text-white bg-blue-500 rounded-md py-2 px-4">
+            <button 
+            wire:click="professional_id = {{$order->professional_id}}"
+            x-data="" x-on:click.prevent="$dispatch('open-modal', 'send-message')" class="text-white bg-blue-500 rounded-md py-2 px-4">
               Send Message
             </button>
+            {{-- <x-danger-button
+            x-data=""
+            x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
+            >{{ __('Delete Account') }}</x-danger-button> --}}
+  
           </div>
           <div class="p-2 flex flex-col space-y-3">
             <p class="py-2 px-4 bg-black text-white"><span class="font-semibold">Total Price:</span> Rs.{{($order->payment->payment_amount)/100}}</p>
             <p class="py-2 px-4 bg-gray-300"><span class="font-semibold">Payment Status:</span> {{$order->payment->payment_status}}</p>
             <p class="py-2 px-4 bg-gray-300"><span class="font-semibold">Service Status:</span> {{$order->order_status}}</p>
+            <button wire:click="cancelBooking({{ $order->id }})" type="button" class="py-2 px-4 bg-red-700 text-white">Cancel booking</button>
           </div>
         </div>
       </div>
       @endforeach
+      @endif
+      <x-modal name="send-message" :show="$errors->first()" focusable>
+        <form>
+         <div class="p-2">
+          <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Write your message</label>
+          <textarea id="message" wire:model="message" rows="4" 
+          class="block p-2.5  w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+          placeholder="Write your message here...">
+          </textarea>
+          <button wire:click="sendMessage" type="button" class="mt-4 !bg-blue-700 !p-2 text-white rounded-md">Send</button>
+        </div>
+        </form>
+     </x-modal>
 </div>

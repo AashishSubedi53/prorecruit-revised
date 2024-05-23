@@ -72,7 +72,6 @@ class Checkout extends Component
         $this->proService = ProfessionalService::with('service')->where('id', $this->proServiceId)->first();
         $this->service_name = $this->proService->service->service_name;           
 
-        // $this->service_price = $this->proService->price;     
         $this->service_price = $this->proService->price;
         $this->totalProcessingFee = $this->service_price * 0.05;
         $this->totalTax = $this->service_price * 0.08;
@@ -121,9 +120,13 @@ class Checkout extends Component
     }
 
  
-public function KhaltiVerification($order_id)
+    public function KhaltiVerification($order_id)
     {     
        
+        $service_name = $this->service_name;
+        $total_charge = round($this->totalCharge);
+        $two0 = '00';
+        $total = $total_charge.$two0;
         
         $url = "https://a.khalti.com/api/v2/epayment/initiate/";
         
@@ -143,7 +146,7 @@ public function KhaltiVerification($order_id)
             CURLOPT_POSTFIELDS => '{
             "return_url": "'. $requestBackURL . '",
             "website_url": "http://127.0.0.1:8000",
-            "amount": "1000",
+            "amount": " '.$total.'",
             "purchase_order_id": "Order01",
             "purchase_order_name": "test",
             "customer_info": {
@@ -171,38 +174,6 @@ public function KhaltiVerification($order_id)
             return "Error initiating payment.";
         }
     }
-
-//     public function KhaltiCallback(Request $request) 
-//     {
-//         // dd($request->input('status'));
-//         if($request->input('status') == 'Completed'){
-
-//             $request->merge(session('khaltiPayment'));
-//             $request->merge(["payment_method"=>"Khalti"]);
-//             $request->merge(["payment_type" => "Khalti Online"]);
-//             $this->OrderSuccess($request);
-            
-//             // $notification = array(
-//             //     'message' => "Your Order Has Been Placed Successfully.",
-//             //     'alert-type' => 'success'
-//             // );
-
-           
-//             Session::forget('khaltiPayment');
-//             // Notification::send($user, new OrderComplete($request->name));
-     
-//             return redirect()->route('customer.my-bookings');
-//         }
-//     }
-
-   
-
-
-
-
-    // public function StripeCheckout(){
-    //     return view('livewire.checkout');
-    // }
 
     public function session(Request $request){
         Stripe::setApiKey(config('stripe.sk'));
@@ -232,18 +203,7 @@ public function KhaltiVerification($order_id)
             'cancel_url' =>route('customer.checkout'),
             ]);
 
-        // $message = '';
-        // if (FacadesRoute::currentRouteName() === 'home') {
-        //     $message = 'Payment Successful!!';
-        // } elseif (FacadesRoute::currentRouteName() === 'customer.checkout') {
-        //     $message = 'Payment failed!!';
-        // }
-
-    // Flashing message to session
-    // Session::flash('message', $message);
-
-    // if(FacadesRoute::currentRouteName() === 'customer.checkout'){
-    //     dd('hello');
+       
         $payment = Payment::create([
             'payment_status' => 'paid',
             'payment_method' => 'Stripe Payment',
@@ -267,15 +227,9 @@ public function KhaltiVerification($order_id)
 
         ]);
 
-
-    // }
-
             return redirect()->away($session->url);
     }
 
-    // public function success(){
-    //     return "Thank you for your order. You have have just completed your payment. The professional will reach out to you soon!";
-    // }
 
     public function render()
     {

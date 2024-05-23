@@ -93,7 +93,7 @@
   </div>
 
   <div class="shadow-lg border border-gray-300 bg-slate-200 rounded-lg hover:shadow-xl active:bg-gray-300 py-5">
-    <a href="" class="flex flex-col items-center">
+    <a href="{{route('professional.my-messages')}}" class="flex flex-col items-center">
       <div class="w-20 h-24">
         <img src="{{asset('storage/icons/message.png')}}" alt="">
       </div>
